@@ -25,3 +25,15 @@ export async function ogAsset(name: string) {
   const type = name.endsWith(".png") ? "image/png" : "image/jpeg";
   return `data:${type};base64,${buf.toString("base64")}`;
 }
+
+/** The 蛊 seal (same artwork as the favicon) as a data URI. */
+export async function ogSeal() {
+  const svg = await readFile(join(root, "app/icon.svg"));
+  return `data:image/svg+xml;base64,${svg.toString("base64")}`;
+}
+
+/** Host shown in the corner of share images, e.g. "sulaiman.dev". Hidden on localhost. */
+export function ogHost(url: string) {
+  const host = new URL(url).host;
+  return host.startsWith("localhost") ? "" : host;
+}

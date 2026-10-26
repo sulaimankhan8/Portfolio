@@ -7,6 +7,7 @@ import { Footer } from "@/components/Footer";
 import { Glyph, RankBadge, StatStrip, monoCls } from "@/components/ui";
 import { ESSENCE, PATHS, STATUS } from "@/content/essence";
 import { MAJOR_GU, getGu } from "@/content/gu";
+import { SITE } from "@/content/site";
 import type { RecordKind } from "@/content/types";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -18,13 +19,46 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const g = getGu((await params).slug);
   if (!g?.dossier) return {};
+  const title = `${g.name} — ${g.plain}`;
+  const description = `${g.plain}. ${g.dossier.problem} Built by ${SITE.name}.`;
+  const url = `/gu/${g.slug}`;
   return {
-    title: `${g.name} — ${g.plain}`,
-    description: g.dossier.problem,
-    openGraph: {
-      title: `${g.name} — ${g.plain}`,
-      description: g.dossier.problem,
-    },
+    title,
+    description,
+    keywords: [g.plain, ...(g.stack?.split(" · ") ?? []), SITE.name, "case study"],
+    alternates: { canonical: url },
+    openGraph: { type: "article", url, title, description, authors: [SITE.fullName] },
+    twitter: { card: "summary_large_image", title, description },
+  };
+}
+
+/** Breadcrumb + project structured data for one dossier page. */
+function dossierLd(g: NonNullable<ReturnType<typeof getGu>>) {
+  const url = `${SITE.url}/gu/${g.slug}`;
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: SITE.name, item: SITE.url },
+          { "@type": "ListItem", position: 2, name: "Projects", item: `${SITE.url}/#major` },
+          { "@type": "ListItem", position: 3, name: g.name, item: url },
+        ],
+      },
+      {
+        "@type": "CreativeWork",
+        "@id": `${url}#project`,
+        name: g.plain,
+        alternateName: g.name,
+        description: g.dossier?.abilityLong ?? g.ability,
+        url,
+        image: `${url}/opengraph-image`,
+        ...(g.stack ? { keywords: g.stack.split(" · ").join(", ") } : {}),
+        ...(g.liveUrl ? { sameAs: g.liveUrl } : {}),
+        author: { "@type": "Person", "@id": `${SITE.url}/#person`, name: SITE.fullName, url: SITE.url },
+      },
+    ],
   };
 }
 
@@ -55,6 +89,7 @@ export default async function DossierPage({ params }: Props) {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(dossierLd(g)) }} />
       <main id="main" className="mx-auto flex max-w-[1200px] flex-col gap-20 px-4 pb-24 md:px-8">
         <nav aria-label="Breadcrumb" className="flex flex-wrap items-center justify-between gap-4 border-b border-line py-7">
           <Link href="/#major" className={`inline-flex min-h-11 items-center text-[13px] text-bone no-underline ${monoCls}`}>

@@ -3,5 +3,14 @@ import { MAJOR_GU } from "@/content/gu";
 import { SITE } from "@/content/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [{ url: SITE.url, priority: 1 }, ...MAJOR_GU.map((g) => ({ url: `${SITE.url}/gu/${g.slug}`, priority: 0.8 }))];
+  const lastModified = new Date();
+  return [
+    { url: SITE.url, lastModified, changeFrequency: "monthly", priority: 1 },
+    ...MAJOR_GU.map((g) => ({
+      url: `${SITE.url}/gu/${g.slug}`,
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
+  ];
 }

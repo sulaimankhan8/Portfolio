@@ -8,15 +8,44 @@ import { StickyNav } from "@/components/StickyNav";
 import { LESSER_GU } from "@/content/gu";
 import { SITE } from "@/content/site";
 
+/** Structured data: who this is (Person), the site, and that the page is a profile —
+ *  lets search engines show a name/knowledge panel and link GitHub + LinkedIn. */
 const personLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: SITE.fullName,
-  alternateName: SITE.name,
-  jobTitle: SITE.role,
-  email: `mailto:${SITE.email}`,
-  address: { "@type": "PostalAddress", addressLocality: SITE.city, addressCountry: "IN" },
-  sameAs: [SITE.github, SITE.linkedin],
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${SITE.url}/#person`,
+      name: SITE.fullName,
+      alternateName: SITE.name,
+      jobTitle: SITE.role,
+      description: SITE.description,
+      url: SITE.url,
+      image: `${SITE.url}/opengraph-image`,
+      email: `mailto:${SITE.email}`,
+      address: { "@type": "PostalAddress", addressLocality: SITE.city, addressCountry: "IN" },
+      worksFor: { "@type": "Organization", name: SITE.worksFor },
+      alumniOf: { "@type": "CollegeOrUniversity", name: SITE.alumniOf },
+      knowsAbout: SITE.knowsAbout,
+      sameAs: [SITE.github, SITE.linkedin],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE.url}/#website`,
+      url: SITE.url,
+      name: `${SITE.name} · Portfolio`,
+      inLanguage: "en",
+      publisher: { "@id": `${SITE.url}/#person` },
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": `${SITE.url}/#profile`,
+      url: SITE.url,
+      name: `${SITE.name} — ${SITE.role}`,
+      isPartOf: { "@id": `${SITE.url}/#website` },
+      mainEntity: { "@id": `${SITE.url}/#person` },
+    },
+  ],
 };
 
 export default function Home() {

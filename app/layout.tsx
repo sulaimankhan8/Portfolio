@@ -57,19 +57,35 @@ const brush = localFont({
   preload: true,
 });
 
+const TITLE = `${SITE.name} — ${SITE.role}`;
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
-  title: {
-    default: `${SITE.name} — ${SITE.role}`,
-    template: `%s | ${SITE.name}`,
+  title: { default: TITLE, template: `%s | ${SITE.name}` },
+  description: SITE.description,
+  applicationName: SITE.name,
+  authors: [{ name: SITE.fullName, url: SITE.url }],
+  creator: SITE.fullName,
+  keywords: SITE.keywords,
+  category: "technology",
+  alternates: { canonical: "/" },
+  formatDetection: { telephone: false, address: false, email: false },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
   },
-  description: SITE.tagline,
   openGraph: {
-    type: "website",
-    title: `${SITE.name} — ${SITE.role}`,
-    description: SITE.tagline,
+    type: "profile",
+    url: "/",
+    siteName: `${SITE.name} · Portfolio`,
+    locale: "en_IN",
+    title: TITLE,
+    description: SITE.description,
+    firstName: "Sulaiman",
+    lastName: "Khan",
   },
-  twitter: { card: "summary_large_image" },
+  twitter: { card: "summary_large_image", title: TITLE, description: SITE.description },
 };
 
 export const viewport: Viewport = {

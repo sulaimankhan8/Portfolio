@@ -52,6 +52,14 @@ Personal portfolio for Sulaiman Khan (backend engineer), themed on the web novel
 - Lighthouse (local, simulated mobile): ~84–89 performance, 100 accessibility, 100 SEO; desktop 100. CI warns below 90 but doesn't fail. Re-measure on the deployed Vercel URL with PageSpeed Insights.
 - Rain starts after load + idle (`RainStarter`); below-fold sections use `content-visibility: auto` via `.reveal`.
 
+## SEO & sharing
+
+- Metadata lives in `app/layout.tsx` (site-wide) and `generateMetadata` in `app/gu/[slug]/page.tsx`. Search/preview text is `SITE.description` (plain English); the lore tagline is only on the page.
+- `SITE.url`: `NEXT_PUBLIC_SITE_URL` → Vercel's production URL → localhost. Canonicals, sitemap and share-image URLs are built from it.
+- JSON-LD: Person + WebSite + ProfilePage on `/`, BreadcrumbList + CreativeWork on each dossier.
+- Icons: `app/icon.svg` (the 蛊 seal), `app/favicon.ico` (16/32/48, RGBA), `app/apple-icon.png`, `public/icon-{192,512,maskable-512}.png` for `app/manifest.ts`.
+- Share images: `app/opengraph-image.tsx`, `app/gu/[slug]/opengraph-image.tsx`; `twitter-image.tsx` re-exports them. Check them with `curl localhost:3000/opengraph-image -o og.png`.
+
 ## Facts policy
 
 Only real numbers from the résumé/projects. Discord screenshots use sample chat data (the dossier says so). Don't invent metrics.
