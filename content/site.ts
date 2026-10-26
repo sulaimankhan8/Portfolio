@@ -6,8 +6,8 @@ export const SITE = {
   email: "sulaimanclass12b@gmail.com",
   github: "https://github.com/sulaimankhan8",
   linkedin: "https://www.linkedin.com/in/suleman-khan-b4ab2b275",
-  /** drop the current PDF into public/resume.pdf */
-  resume: "/resume.pdf",
+  /** the current PDF lives at public/resume_sulaiman.pdf */
+  resume: "/resume_sulaiman.pdf",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   tagline:
     "I refine backends the way Gu are refined: under pressure, until only what survives remains. Real-time chat, payments, and the queues that hold them together.",

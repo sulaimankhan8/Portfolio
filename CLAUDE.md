@@ -58,7 +58,6 @@ Only real numbers from the résumé/projects. Discord screenshots use sample cha
 
 ## Still open
 
-- Add `public/resume.pdf` (the Résumé link 404s until then)
 - Rank 2 date in `content/profile.ts` (month intern → full-time) is still just "2025"
 - Custom domain → set `NEXT_PUBLIC_SITE_URL`
 - Stretch: live React Three Fiber hero (only if mobile Lighthouse stays ≥ 90), Gu Codex page
