@@ -5,7 +5,7 @@ Personal portfolio for Sulaiman Khan (backend engineer), themed on the web novel
 ## Stack
 
 - Next.js 16 (App Router, Turbopack), React 19, TypeScript, Tailwind CSS v4 (`@theme` tokens in `app/globals.css`)
-- Fonts via `next/font/local` in `app/layout.tsx`: Cormorant, Inter and Plex Mono from the `@fontsource` packages; Ma Shan Zheng is a 15 KB subset in `app/fonts/` (rebuild with `python3 scripts/subset-brush-font.py` whenever you add new Chinese characters)
+- Fonts via `next/font/local` in `app/layout.tsx`: Cormorant, Inter and Plex Mono from the `@fontsource` packages; Ma Shan Zheng is a ~25 KB subset in `app/fonts/` (rebuild with `python3 scripts/subset-brush-font.py` whenever you add new Chinese characters)
 - Static site: `/`, `/gu/[slug]` and their share images are prerendered
 - Client components only: `LesserGu` (filter), `Gallery` (dossier screens), `Summon` (mailto + copy email), `StickyNav`, `Reveal`, `RainStarter`
 - Vercel Analytics + Speed Insights in the layout (only report on Vercel)
@@ -59,6 +59,10 @@ Personal portfolio for Sulaiman Khan (backend engineer), themed on the web novel
 - JSON-LD: Person + WebSite + ProfilePage on `/`, BreadcrumbList + CreativeWork on each dossier.
 - Icons: `app/icon.svg` (the 蛊 seal), `app/favicon.ico` (16/32/48, RGBA), `app/apple-icon.png`, `public/icon-{192,512,maskable-512}.png` for `app/manifest.ts`.
 - Share images: `app/opengraph-image.tsx`, `app/gu/[slug]/opengraph-image.tsx`; `twitter-image.tsx` re-exports them. Check them with `curl localhost:3000/opengraph-image -o og.png`.
+
+## Credits
+
+- Footer credits come from `content/credits.ts`: the Reverend Insanity fan-tribute note, music, fonts, art. Any music file added to the site must have an entry; keep CC BY credits visible.
 
 ## Facts policy
 

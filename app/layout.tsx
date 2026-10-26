@@ -6,7 +6,7 @@ import "./globals.css";
 import { ThemeSwitch, themeScript } from "@/components/ThemeSwitch";
 import { SITE } from "@/content/site";
 
-/** Ma Shan Zheng subset to the ~40 hanzi the site uses (15 KB instead of ~800 KB).
+/** Ma Shan Zheng subset to the ~60 hanzi the site uses (~25 KB instead of ~800 KB).
  *  Re-run `python3 scripts/subset-brush-font.py` after adding new Chinese characters. */
 // Latin fonts are self-hosted through next/font so they are preloaded and get
 // size-matched fallbacks (no layout shift). Files come from the @fontsource packages.

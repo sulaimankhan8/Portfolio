@@ -108,3 +108,13 @@ test("share images are generated", async ({ request }) => {
     expect(res.headers()["content-type"]).toContain("image/png");
   }
 });
+
+test.describe("no sideways scroll", () => {
+  for (const path of ["/", "/gu/myriad-voices", "/gu/numeral-insight", "/gu/blood-seal"]) {
+    test(`${path} fits the viewport width`, async ({ page }) => {
+      await page.goto(path);
+      const [scroll, client] = await page.evaluate(() => [document.documentElement.scrollWidth, document.documentElement.clientWidth]);
+      expect(scroll).toBeLessThanOrEqual(client);
+    });
+  }
+});
