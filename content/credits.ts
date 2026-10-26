@@ -16,6 +16,12 @@ export type Credit = {
   licenceUrl?: string;
   /** which path plays it */
   use?: string;
+  /** the theme that plays this track; the sound button reads its file from here, so every track heard is credited */
+  path?: "demonic" | "righteous";
+  /** file in public/ without extension; a .webm (Opus) and an .m4a (AAC) copy must both exist */
+  file?: string;
+  /** CC BY asks you to say if the work was changed */
+  changes?: string;
 };
 
 export const MUSIC: Credit[] = [
@@ -26,6 +32,9 @@ export const MUSIC: Credit[] = [
     licence: "CC0",
     licenceUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
     use: "Righteous",
+    path: "righteous",
+    file: "/audio/lotus-pond",
+    changes: "Loop version, level-matched",
   },
   {
     title: "Dark Zen",
@@ -34,6 +43,9 @@ export const MUSIC: Credit[] = [
     licence: "CC BY 4.0",
     licenceUrl: "https://creativecommons.org/licenses/by/4.0/",
     use: "Demonic",
+    path: "demonic",
+    file: "/audio/dark-zen",
+    changes: "90-second excerpt (from 2:40), looped and level-matched",
   },
   // Alternatives — move into the list above if you switch tracks:
   // { title: "Dark Ambient Drone", author: "Tsorthan Grove", source: "https://opengameart.org/content/dark-ambient-drone", licence: "CC BY 4.0", licenceUrl: "https://creativecommons.org/licenses/by/4.0/" },

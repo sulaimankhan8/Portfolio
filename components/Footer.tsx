@@ -63,6 +63,7 @@ export function Footer() {
                           m.licence
                         )}
                       </span>
+                      {m.changes && <span className="text-[12px] text-mist">{m.changes}</span>}
                     </div>
                   </li>
                 ))}

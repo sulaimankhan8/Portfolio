@@ -30,10 +30,12 @@ Inspired by [_Reverend Insanity_](https://en.wikipedia.org/wiki/Reverend_Insanit
 
 The footer credits live in `content/credits.ts`. Every track the site plays must be listed there; CC BY tracks need title, author, source and licence shown for as long as they are used.
 
-| Use       | Track      | Author         | Licence   | Source                                         |
-| --------- | ---------- | -------------- | --------- | ---------------------------------------------- |
-| Righteous | Lotus Pond | Bite Me Games  | CC0       | https://bitemegames.itch.io/chinese-game-music |
-| Demonic   | Dark Zen   | Tsorthan Grove | CC BY 4.0 | https://opengameart.org/content/dark-zen       |
+| Use       | Track      | Author         | Licence   | Source                                         | Changes                                                                | File                                 |
+| --------- | ---------- | -------------- | --------- | ---------------------------------------------- | ---------------------------------------------------------------------- | ------------------------------------ |
+| Righteous | Lotus Pond | Bite Me Games  | CC0       | https://bitemegames.itch.io/chinese-game-music | Loop version, level-matched                                            | `public/audio/lotus-pond.{webm,m4a}` |
+| Demonic   | Dark Zen   | Tsorthan Grove | CC BY 4.0 | https://opengameart.org/content/dark-zen       | 90 s excerpt from 2:40, crossfaded into a seamless loop, level-matched | `public/audio/dark-zen.{webm,m4a}`   |
+
+Music is on by default. Browsers don't allow sound before the visitor interacts, so it starts on their first click, tap or key press (or straight away where the browser allows autoplay, e.g. Firefox with autoplay enabled). The floating 音 button at the bottom-right mutes it, and muting is remembered on later visits. Nothing is downloaded until playback starts, and only the current path's track (about 0.6–0.9 MB) is fetched; switching path crossfades to the other track.
 
 Fonts (Cormorant Garamond, Inter, IBM Plex Mono, Ma Shan Zheng) are under the SIL Open Font License. 3D renders and hero scenes were made for this site with three.js (`tools/render-3d`).
 
@@ -54,7 +56,7 @@ Every character on the site is decorative and sits next to an English label (scr
 | 爆        | bào     | burst, explode                                         | 404 page; "Self-detonated" project status                                                                                                                                               |
 | 全        | quán    | all                                                    | "All" filter in Lesser Gu                                                                                                                                                               |
 | 致谢      | zhìxiè  | thanks, acknowledgements                               | Footer "Credits" heading                                                                                                                                                                |
-| 音        | yīn     | sound, music                                           | Footer "Music" credits                                                                                                                                                                  |
+| 音        | yīn     | sound, music                                           | Floating music button (bottom-right); footer "Music" credits                                                                                                                            |
 | 炼        | liàn    | refine, craft                                          | Footer "Craft" credits (type and art); see Paths for its other uses                                                                                                                     |
 
 ### Numerals (section and chapter markers)

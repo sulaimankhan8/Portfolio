@@ -62,6 +62,7 @@ Personal portfolio for Sulaiman Khan (backend engineer), themed on the web novel
 
 ## Credits
 
+- Music: `lib/music.ts` (Web Audio, gapless loops, crossfade on path switch) + `components/SoundToggle.tsx` (floating button, bottom-right; rendered in `app/layout.tsx`). Tracks are read from `MUSIC` in `content/credits.ts` (`path` + `file`), so anything that plays is credited. Each file needs `.webm` (Opus 64k) and `.m4a` (AAC 96k) in `public/audio/`, loudness-matched to about -20 LUFS. On by default but starts only on the first click/tap/key (browser autoplay rules) unless `navigator.getAutoplayPolicy` says sound is allowed; muting is saved in `localStorage["cultivation-sound"]`. Nothing loads until playback starts.
 - Footer credits come from `content/credits.ts`: the Reverend Insanity fan-tribute note, music, fonts, art. Any music file added to the site must have an entry; keep CC BY credits visible.
 
 ## Facts policy

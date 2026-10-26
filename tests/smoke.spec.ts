@@ -118,3 +118,33 @@ test.describe("no sideways scroll", () => {
     });
   }
 });
+
+test("music starts on the first interaction, follows the path, and stays off once muted", async ({ page }) => {
+  const audio: string[] = [];
+  page.on("request", (r) => {
+    if (r.url().includes("/audio/")) audio.push(new URL(r.url()).pathname);
+  });
+  await page.goto("/");
+  const music = page.getByRole("button", { name: "Music" });
+  await expect(music).toHaveAttribute("aria-pressed", "true"); // on by default, waiting for a click
+  await page.waitForLoadState("networkidle");
+  expect(audio).toEqual([]); // nothing downloaded before the first interaction
+
+  await page.locator("h1").click();
+  await expect(music.locator(".sound-bars")).toHaveAttribute("data-state", "on", { timeout: 15_000 });
+  expect(audio.some((a) => a.startsWith("/audio/dark-zen."))).toBe(true);
+
+  await page.getByRole("radio", { name: /Righteous/ }).click();
+  await expect.poll(() => audio.some((a) => a.startsWith("/audio/lotus-pond."))).toBe(true);
+
+  await music.click();
+  await expect(music).toHaveAttribute("aria-pressed", "false");
+
+  // muting is remembered: after a reload, clicks no longer start music
+  audio.length = 0;
+  await page.reload();
+  await expect(music).toHaveAttribute("aria-pressed", "false");
+  await page.locator("h1").click();
+  await page.waitForTimeout(500);
+  expect(audio).toEqual([]);
+});

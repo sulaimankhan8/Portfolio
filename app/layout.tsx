@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { SoundToggle } from "@/components/SoundToggle";
 import { ThemeSwitch, themeScript } from "@/components/ThemeSwitch";
 import { SITE } from "@/content/site";
 
@@ -109,6 +110,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         {children}
         <ThemeSwitch />
+        <SoundToggle />
         <Analytics />
         <SpeedInsights />
       </body>
