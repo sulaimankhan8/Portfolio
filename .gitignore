@@ -1,0 +1,11 @@
+node_modules
+.next
+out
+*.tsbuildinfo
+.env*.local
+*.log
+.vercel
+playwright-report
+test-results
+.lighthouseci
+.font-tmp

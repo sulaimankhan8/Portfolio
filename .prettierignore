@@ -1,0 +1,10 @@
+.next
+node_modules
+public
+assets
+tools
+package-lock.json
+playwright-report
+test-results
+.lighthouseci
+.github

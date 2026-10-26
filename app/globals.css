@@ -1,0 +1,411 @@
+@import "tailwindcss";
+
+@theme {
+  /* Gu Ink — ground, text, accents */
+  --color-ink: #0a0a0b;
+  --color-void: #121315;
+  --color-ash: #1a1b1e;
+  --color-line: #2c2a28;
+  --color-line-strong: #4a443f;
+  --color-bone: #ece4d4;
+  --color-bone-dim: #cfc6b8;
+  --color-mist: #a8a196;
+  --color-blood: #b8261f;
+  --color-ember: #e5554a;
+  --color-jade: #5fd3a0;
+  --color-gold: #d6a54a;
+  --color-blood-hover: #d2342b;
+
+  /* essence colour per rank */
+  --color-r1: #6fbf8a;
+  --color-r2: #e0664e;
+  --color-r3: #c9cdd3;
+  --color-r4: #e0b341;
+  --color-r5: #a88beb;
+
+  --font-display: var(--font-cormorant), Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-plex), ui-monospace, monospace;
+  --font-brush: var(--font-ma-shan), var(--font-cormorant), serif;
+
+  --ease-ink: cubic-bezier(0.2, 0.7, 0.1, 1);
+}
+
+/* Demonic path is the default (the @theme values above). Extra non-colour tokens: */
+:root {
+  --shadow-deep: rgba(0, 0, 0, 0.55);
+  --vital-glow: rgba(214, 165, 74, 0.16);
+  --vital-wash: rgba(214, 165, 74, 0.1);
+  color-scheme: dark;
+}
+
+/* Righteous path: daylight ink-wash — mist ground, ink text, gold fills, azure and jade accents.
+   Every text token keeps ≥ 4.5:1 on the ground. */
+:root[data-theme="righteous"] {
+  --color-ink: #eef1ec;
+  --color-void: #f9fbf7;
+  --color-ash: #e1e7e0;
+  --color-line: #c9d1ca;
+  --color-line-strong: #8e9a92;
+  --color-bone: #16201b;
+  --color-bone-dim: #2b3631;
+  --color-mist: #4a5751;
+  --color-blood: #c99a3b;
+  --color-blood-hover: #b8862a;
+  --color-ember: #1e6e8c;
+  --color-jade: #1a6b4c;
+  --color-gold: #7a5810;
+  --color-r1: #276b43;
+  --color-r2: #a33c27;
+  --color-r3: #5e6670;
+  --color-r4: #7a5810;
+  --color-r5: #6a4fc0;
+  --shadow-deep: rgba(22, 32, 27, 0.18);
+  --vital-glow: rgba(201, 154, 59, 0.22);
+  --vital-wash: rgba(201, 154, 59, 0.12);
+  color-scheme: light;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background: var(--color-ink);
+  }
+  body {
+    background: var(--color-ink);
+    color: var(--color-bone);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  a {
+    color: var(--color-ember);
+    transition: color 160ms;
+  }
+  a:hover {
+    color: #ff8378;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-jade);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: var(--color-blood);
+    color: var(--color-bone);
+  }
+}
+
+/* Animated rain. Each layer is one tile larger than the hero and slides by exactly one
+   tile per loop with a transform, so it never jumps and runs on the compositor
+   (no repaint per frame — animating background-position cost ~2 s of main thread on mobile). */
+.rain {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  pointer-events: none;
+  background-repeat: repeat;
+  will-change: transform;
+}
+/* rain layers stay unpainted until RainStarter adds .rain-on after the page has loaded */
+.rain:not(.rain-on) {
+  display: none;
+}
+.rain-far {
+  top: -1024px;
+  right: -200px;
+  background-image: url(/hero/rain-far.png);
+  background-size: 200px 1024px;
+  opacity: 0.55;
+  animation: rain-far 1.5s linear infinite;
+}
+.rain-near {
+  top: -1536px;
+  right: -300px;
+  background-image: url(/hero/rain-near.png);
+  background-size: 300px 1536px;
+  opacity: 0.7;
+  animation: rain-near 0.95s linear infinite;
+}
+@keyframes rain-far {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-200px, 1024px, 0);
+  }
+}
+@keyframes rain-near {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-300px, 1536px, 0);
+  }
+}
+
+/* Hero: fades into the page ground so text stays readable in both themes */
+.hero-fade-x {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--color-ink) 92%, transparent) 0%,
+    color-mix(in srgb, var(--color-ink) 55%, transparent) 38%,
+    transparent 62%
+  );
+}
+.hero-fade-y {
+  background: linear-gradient(180deg, transparent, var(--color-ink));
+}
+.hero-img-righteous {
+  display: none;
+}
+:root[data-theme="righteous"] .hero-img-demonic,
+:root[data-theme="righteous"] .rain {
+  display: none;
+}
+:root[data-theme="righteous"] .hero-img-righteous {
+  display: block;
+}
+
+.vital-card {
+  background: radial-gradient(ellipse at 18% 40%, var(--vital-wash), transparent 55%), var(--color-void);
+  box-shadow: 0 0 80px var(--vital-glow);
+}
+
+/* ---- Righteous clouds: tiles slide one tile-width per loop (seamless), compositor-only ---- */
+.clouds {
+  position: absolute;
+  left: 0;
+  display: none;
+  pointer-events: none;
+  background-repeat: repeat-x;
+  will-change: transform;
+}
+:root[data-theme="righteous"] .clouds {
+  display: block;
+}
+.clouds-far {
+  top: 3%;
+  height: 360px;
+  right: -1600px;
+  background-image: url(/hero/clouds-far.png);
+  background-size: 1600px 360px;
+  opacity: 0.6;
+  animation: drift-far 150s linear infinite;
+}
+.clouds-near {
+  top: 44%;
+  height: 420px;
+  right: -1800px;
+  background-image: url(/hero/clouds-near.png);
+  background-size: 1800px 420px;
+  opacity: 0.75;
+  animation: drift-near 85s linear infinite;
+}
+@keyframes drift-far {
+  to {
+    transform: translate3d(-1600px, 0, 0);
+  }
+}
+@keyframes drift-near {
+  to {
+    transform: translate3d(-1800px, 0, 0);
+  }
+}
+
+/* ---- Hanging-scroll quotes: only the active path's set shows; its three lines take turns ---- */
+.quote-set-righteous,
+:root[data-theme="righteous"] .quote-set-demonic {
+  display: none;
+}
+:root[data-theme="righteous"] .quote-set-righteous {
+  display: block;
+}
+.quote {
+  opacity: 0;
+  animation: quote-cycle 24s ease-in-out infinite;
+}
+.quote-1 {
+  animation-delay: 8s;
+}
+.quote-2 {
+  animation-delay: 16s;
+}
+@keyframes quote-cycle {
+  0% {
+    opacity: 0;
+  }
+  4%,
+  29% {
+    opacity: 0.85;
+  }
+  33%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ---- Sky effects (hero). Opacity-only animations, so they run on the compositor. ---- */
+.fx {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: none;
+}
+:root:not([data-theme="righteous"]) .fx-on .fx-lightning,
+:root[data-theme="righteous"] .fx-on .fx-aura {
+  display: block;
+}
+
+/* Demonic: red lightning. Long dark stretches, then a double-flicker strike. */
+.fx-flash,
+.fx-bolt {
+  position: absolute;
+  opacity: 0;
+  will-change: opacity;
+}
+.fx-flash {
+  inset: 0;
+  mix-blend-mode: screen;
+}
+.fx-flash-a {
+  background: radial-gradient(ellipse 55% 60% at 70% 22%, rgba(255, 70, 50, 0.42), transparent 70%);
+  animation: strike 9s linear infinite;
+}
+.fx-flash-b {
+  background: radial-gradient(ellipse 45% 55% at 88% 30%, rgba(255, 90, 60, 0.32), transparent 70%);
+  animation: strike 13s linear 4.5s infinite;
+}
+.fx-bolt {
+  top: 0;
+  height: 62%;
+  width: 120px;
+  overflow: visible;
+}
+.fx-bolt polyline {
+  fill: none;
+  stroke: rgba(255, 80, 60, 0.45);
+  stroke-width: 7;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.fx-bolt .fx-bolt-core {
+  stroke: #ffe4dc;
+  stroke-width: 1.6;
+}
+.fx-bolt-a {
+  left: 64%;
+  animation: strike 9s linear infinite;
+}
+.fx-bolt-b {
+  left: 84%;
+  height: 48%;
+  animation: strike 13s linear 4.5s infinite;
+}
+@keyframes strike {
+  0%,
+  86% {
+    opacity: 0;
+  }
+  87% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 0.15;
+  }
+  89.5% {
+    opacity: 0.9;
+  }
+  92% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Righteous: azure qi. Slow swell with a brief flicker, two layers out of phase. */
+.fx-aura-a,
+.fx-aura-b {
+  position: absolute;
+  inset: 0;
+  opacity: 0.2;
+  will-change: opacity;
+}
+.fx-aura-a {
+  background: radial-gradient(ellipse 38% 46% at 63% 44%, rgba(70, 150, 230, 0.55), transparent 70%);
+  animation: qi 6s ease-in-out infinite;
+}
+.fx-aura-b {
+  background:
+    radial-gradient(ellipse 60% 28% at 40% 78%, rgba(90, 170, 235, 0.4), transparent 70%),
+    radial-gradient(ellipse 30% 30% at 92% 30%, rgba(110, 180, 240, 0.35), transparent 70%);
+  animation: qi 9.5s ease-in-out 2.2s infinite;
+}
+@keyframes qi {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  44% {
+    opacity: 0.25;
+  }
+  46% {
+    opacity: 0.7;
+  }
+  49% {
+    opacity: 0.35;
+  }
+  70% {
+    opacity: 0.45;
+  }
+}
+
+/* Section reveal (see components/Reveal.tsx). content-visibility skips style, layout and
+   paint for sections that are still off-screen — the biggest single win on mobile Lighthouse. */
+.reveal {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+  transition:
+    opacity 600ms var(--ease-ink),
+    transform 600ms var(--ease-ink);
+}
+.reveal-pending {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+/* Single glint pulse (the Gu in the hero) */
+@keyframes glint {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+}
+.glint {
+  animation: glint 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx {
+    display: none !important;
+  }
+  .clouds {
+    animation: none;
+  }
+  /* quotes keep cross-fading: an opacity fade, not movement */
+  .rain-far,
+  .rain-near,
+  .glint {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
