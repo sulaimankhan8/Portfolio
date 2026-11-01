@@ -112,7 +112,7 @@
 .rain-far {
   top: -1024px;
   right: -200px;
-  background-image: url(/hero/rain-far.png);
+  background-image: url(/hero/rain-far.webp);
   background-size: 200px 1024px;
   opacity: 0.55;
   animation: rain-far 1.5s linear infinite;
@@ -120,7 +120,7 @@
 .rain-near {
   top: -1536px;
   right: -300px;
-  background-image: url(/hero/rain-near.png);
+  background-image: url(/hero/rain-near.webp);
   background-size: 300px 1536px;
   opacity: 0.7;
   animation: rain-near 0.95s linear infinite;
@@ -186,7 +186,7 @@
   top: 3%;
   height: 360px;
   right: -1600px;
-  background-image: url(/hero/clouds-far.png);
+  background-image: url(/hero/clouds-far.webp);
   background-size: 1600px 360px;
   opacity: 0.6;
   animation: drift-far 150s linear infinite;
@@ -195,7 +195,7 @@
   top: 44%;
   height: 420px;
   right: -1800px;
-  background-image: url(/hero/clouds-near.png);
+  background-image: url(/hero/clouds-near.webp);
   background-size: 1800px 420px;
   opacity: 0.75;
   animation: drift-near 85s linear infinite;

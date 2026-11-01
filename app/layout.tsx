@@ -10,21 +10,22 @@ import { SITE } from "@/content/site";
 /** Ma Shan Zheng subset to the ~60 hanzi the site uses (~25 KB instead of ~800 KB).
  *  Re-run `python3 scripts/subset-brush-font.py` after adding new Chinese characters. */
 // Latin fonts are self-hosted through next/font so they are preloaded and get
-// size-matched fallbacks (no layout shift). Files come from the @fontsource packages.
+// size-matched fallbacks (no layout shift). The files in app/fonts are the @fontsource fonts
+// cut down to the characters the site uses (scripts/subset-latin-fonts.py): ~40% fewer bytes.
 const display = localFont({
   src: [
     {
-      path: "../node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-700-normal.woff2",
+      path: "./fonts/cormorant-700.woff2",
       weight: "700",
       style: "normal",
     },
     {
-      path: "../node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-500-normal.woff2",
+      path: "./fonts/cormorant-500.woff2",
       weight: "500",
       style: "normal",
     },
     {
-      path: "../node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-500-italic.woff2",
+      path: "./fonts/cormorant-500-italic.woff2",
       weight: "500",
       style: "italic",
     },
@@ -34,16 +35,16 @@ const display = localFont({
   fallback: ["Georgia", "serif"],
 });
 const sans = localFont({
-  src: "../node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2",
-  weight: "100 900",
+  src: "./fonts/inter-var.woff2",
+  weight: "400 700",
   variable: "--font-inter",
   display: "swap",
   fallback: ["system-ui", "sans-serif"],
 });
 const mono = localFont({
   src: [
-    { path: "../node_modules/@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2", weight: "400", style: "normal" },
-    { path: "../node_modules/@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-500-normal.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/plex-mono-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/plex-mono-500.woff2", weight: "500", style: "normal" },
   ],
   variable: "--font-plex",
   display: "swap",

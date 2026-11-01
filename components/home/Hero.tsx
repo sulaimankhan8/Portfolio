@@ -1,30 +1,40 @@
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import Link from "next/link";
 import { Button, Glyph, Seal, monoCls } from "@/components/ui";
 import { QUOTES } from "@/content/quotes";
 import { NAV, SITE } from "@/content/site";
+import { HERO_MOBILE } from "@/lib/hero-mobile";
 import { RainStarter } from "./RainStarter";
+
+const HERO_DESKTOP = getImageProps({ src: "/hero/hero.webp", alt: "", fill: true, sizes: "100vw" }).props;
 
 export function Hero() {
   return (
     <section id="top" className="relative h-[720px] overflow-hidden md:h-[820px]">
-      <Image
-        src="/hero/hero.webp"
-        alt=""
-        aria-hidden
-        fill
-        priority
-        sizes="100vw"
-        className="hero-img-demonic object-cover object-[62%_60%]"
-      />
-      {/* fetched eagerly at low priority so switching paths is instant (~25 KB) */}
+      {/* Demonic hero (the LCP). Phones get a 6 KB portrait crop inlined in the HTML, so it paints
+          with the first frame; wider screens get the optimised full image (art direction). */}
+      <link rel="preload" as="image" imageSrcSet={HERO_DESKTOP.srcSet} imageSizes="100vw" media="(min-width: 768px)" fetchPriority="high" />
+      <picture>
+        <source media="(min-width: 768px)" srcSet={HERO_DESKTOP.srcSet} sizes="100vw" />
+        <img
+          src={HERO_MOBILE.src}
+          width={HERO_MOBILE.width}
+          height={HERO_MOBILE.height}
+          alt=""
+          aria-hidden
+          fetchPriority="high"
+          decoding="async"
+          className="hero-img-demonic absolute inset-0 size-full object-cover object-center md:object-[62%_60%]"
+        />
+      </picture>
+      {/* lazy: hidden (display:none) on the demonic path, so it costs nothing until the
+          righteous path is chosen; then it loads at once because it is in view */}
       <Image
         src="/hero/hero-righteous.webp"
         alt=""
         aria-hidden
         fill
-        loading="eager"
-        fetchPriority="low"
+        loading="lazy"
         sizes="100vw"
         className="hero-img-righteous object-cover object-[62%_60%]"
       />

@@ -5,7 +5,7 @@ Personal portfolio for Sulaiman Khan (backend engineer), themed on the web novel
 ## Stack
 
 - Next.js 16 (App Router, Turbopack), React 19, TypeScript, Tailwind CSS v4 (`@theme` tokens in `app/globals.css`)
-- Fonts via `next/font/local` in `app/layout.tsx`: Cormorant, Inter and Plex Mono from the `@fontsource` packages; Ma Shan Zheng is a ~25 KB subset in `app/fonts/` (rebuild with `python3 scripts/subset-brush-font.py` whenever you add new Chinese characters)
+- Fonts via `next/font/local` in `app/layout.tsx`: Cormorant, Inter and Plex Mono from the `@fontsource` packages; Latin fonts are subset copies in `app/fonts/` (`python3 scripts/subset-latin-fonts.py`); Ma Shan Zheng is a ~25 KB subset in `app/fonts/` (rebuild with `python3 scripts/subset-brush-font.py` whenever you add new Chinese characters)
 - Static site: `/`, `/gu/[slug]` and their share images are prerendered
 - Client components only: `LesserGu` (filter), `Gallery` (dossier screens), `Summon` (mailto + copy email), `StickyNav`, `Reveal`, `RainStarter`
 - Vercel Analytics + Speed Insights in the layout (only report on Vercel)
@@ -49,7 +49,12 @@ Personal portfolio for Sulaiman Khan (backend engineer), themed on the web novel
 
 ## Performance notes
 
-- Lighthouse (local, simulated mobile): ~84–89 performance, 100 accessibility, 100 SEO; desktop 100. CI warns below 90 but doesn't fail. Re-measure on the deployed Vercel URL with PageSpeed Insights.
+- Lighthouse (local, simulated mobile): ~94–97 performance; desktop 100. Accessibility and SEO 100. Best practices is 96 until Vercel Web Analytics and Speed Insights are enabled for the project (their scripts 404 otherwise).
+- Phone hero = an inlined ~5 KB portrait crop (`lib/hero-mobile.ts`, built by `scripts/make-hero-mobile.py`) inside a `<picture>`; ≥768px gets the optimised full image, preloaded with `media`. Re-run the script if `public/hero/hero.webp` changes.
+- Latin fonts are subset copies in `app/fonts/` (`scripts/subset-latin-fonts.py`, Inter limited to wght 400–700). Re-run after adding text with new symbols.
+- Rain/cloud tiles are lossless WebP. The righteous hero is `loading="lazy"` (it is display:none on the demonic path).
+- Tried and rejected: `experimental.inlineCss` (made mobile LCP worse), not preloading fonts (worse FCP).
+- "Legacy JavaScript" (~14 KB, e.g. `Array.prototype.at`) is Next.js's own built-in polyfill chunk; it isn't configurable and doesn't affect the score.
 - Rain starts after load + idle (`RainStarter`); below-fold sections use `content-visibility: auto` via `.reveal`.
 
 ## SEO & sharing
