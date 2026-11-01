@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { getGu } from "../content/gu";
 
 test.describe("home", () => {
   test("renders the hero, every section and no horizontal scroll", async ({ page }) => {
@@ -87,7 +88,7 @@ test.describe("dossiers", () => {
       await page.goto(`/gu/${slug}`);
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
       const thumbs = page.getByRole("group", { name: "Choose a screen" }).getByRole("button");
-      await expect(thumbs).toHaveCount(4);
+      await expect(thumbs).toHaveCount(getGu(slug)!.dossier!.shots.length);
       await thumbs.nth(2).click();
       await expect(thumbs.nth(2)).toHaveAttribute("aria-pressed", "true");
       await expect(page.getByRole("link", { name: /Next Gu/ })).toBeVisible();
