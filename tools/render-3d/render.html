@@ -231,6 +231,187 @@ if (sceneName === 'seal') {
   band.rotation.set(Math.PI / 2, 0, Math.PI / 4); band.scale.set(1.38, 1.38, 1); band.position.y = 0.2; body.add(band);
 }
 
+// ---- Lesser Gu: one creature/object per project, tinted by its rank essence ----
+const R1 = 0x6fbf8a, R2 = 0xe0664e, R3 = 0xc9cdd3, GOLD = 0xd6a54a, JADE = 0x5fd3a0, BLOOD = 0xb8261f, BONE = 0xe8dfca;
+const essence = (c, o = {}) => new THREE.MeshPhysicalMaterial({ color: c, metalness: 0.8, roughness: 0.24, clearcoat: 1, clearcoatRoughness: 0.12, emissive: c, emissiveIntensity: 0.06, ...o });
+const goldM = () => new THREE.MeshPhysicalMaterial({ color: GOLD, metalness: 1, roughness: 0.22, clearcoat: 1, emissive: 0x2a1704 });
+const glowM = (c, i = 2) => new THREE.MeshStandardMaterial({ color: c, emissive: c, emissiveIntensity: i });
+const add = (geo, mat, [x, y, z] = [0, 0, 0], parent = scene) => { const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); m.castShadow = true; parent.add(m); return m; };
+function limb(a, b, r, mat, parent = scene) {
+  const A = new THREE.Vector3(...a), B = new THREE.Vector3(...b), d = B.clone().sub(A);
+  const m = new THREE.Mesh(new THREE.CylinderGeometry(r, r, d.length(), 12), mat);
+  m.position.copy(A).add(B).multiplyScalar(0.5); m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), d.normalize()); m.castShadow = true; parent.add(m); return m;
+}
+function haloAt(c, s = 6, y = 0.2) {
+  const rgb = [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',');
+  const h = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTexture('rgba(255,255,255,0.22)', 'rgba(' + rgb + ',0.18)'), blending: THREE.AdditiveBlending, depthWrite: false }));
+  h.scale.set(s, s, 1); h.position.set(0, y, -1.6); scene.add(h);
+}
+function iconCam(pos = [0, 2.2, 8.6], look = [0, -0.25, 0]) { camera = new THREE.PerspectiveCamera(30, W / H, 0.1, 100); camera.position.set(...pos); camera.lookAt(...look); }
+function wormBody(curve, n, r0, mat, band, parent = scene) {
+  let head;
+  for (let i = 0; i < n; i++) {
+    const t = i / (n - 1), p = curve.getPointAt(t), tan = curve.getTangentAt(t);
+    const r = r0 * (0.55 + 0.45 * Math.sin(Math.min(1, t * 1.25) * Math.PI * 0.5));
+    const s = add(new THREE.SphereGeometry(r, 40, 24), i % 4 === 3 ? band : mat, [p.x, p.y, p.z], parent);
+    s.scale.set(1, 0.88, 1.25); s.lookAt(p.clone().add(tan)); head = { p, tan, r };
+  }
+  return head;
+}
+
+// Heaven's Eye — a silver eye-moth inside red detection brackets (traffic vision)
+if (sceneName === 'eye') {
+  iconLights(BLOOD, JADE); iconCam([0, 2.2, 10.4], [0, -0.15, 0]); pedestal(-1.75, 1.5);
+  const G = new THREE.Group(); G.position.y = 0.25; scene.add(G);
+  const wingM = new THREE.MeshPhysicalMaterial({ color: 0xe6ecf2, metalness: 0.3, roughness: 0.1, transparent: true, opacity: 0.5, iridescence: 1, iridescenceIOR: 1.6, side: THREE.DoubleSide, emissive: R3, emissiveIntensity: 0.08 });
+  [[1.25, 0.45, 1.35, 0.5, 0.38], [0.95, -0.42, 0.95, 0.34, -0.32]].forEach(([x, y, sx, sy, rz]) => [-1, 1].forEach((s) => {
+    const w = add(new THREE.SphereGeometry(1, 48, 24), wingM, [x * s, y, -0.45], G); w.scale.set(sx, sy, 0.04); w.rotation.z = rz * s; w.castShadow = false;
+  }));
+  add(new THREE.SphereGeometry(0.92, 96, 64), essence(R3, { metalness: 0.92, roughness: 0.16 }), [0, 0, 0], G);
+  const cap = (r, len, mat) => { const m = add(new THREE.SphereGeometry(r, 96, 32, 0, Math.PI * 2, 0, len), mat, [0, 0, 0], G); m.rotation.x = Math.PI / 2; return m; };
+  cap(0.932, 0.58, new THREE.MeshPhysicalMaterial({ color: JADE, emissive: 0x1f8a5e, emissiveIntensity: 1.1, roughness: 0.1, clearcoat: 1 }));
+  cap(0.938, 0.27, new THREE.MeshPhysicalMaterial({ color: 0x050505, roughness: 0.05, clearcoat: 1 }));
+  const glint = add(new THREE.SphereGeometry(0.07, 16, 16), glowM(0xffffff, 3), [0.22, 0.24, 0.9], G);
+  // detection brackets
+  const br = glowM(BLOOD, 1.4), half = 1.45, L = 0.5, t = 0.05;
+  [[-1, 1], [1, 1], [-1, -1], [1, -1]].forEach(([sx, sy]) => {
+    add(new THREE.BoxGeometry(L, t, t), br, [sx * (half - L / 2), sy * half, 0.6], G);
+    add(new THREE.BoxGeometry(t, L, t), br, [sx * half, sy * (half - L / 2), 0.6], G);
+  });
+  haloAt(R3, 6);
+}
+
+// Gold-Sniffing — a silver beetle with a long snout, nosing a gold ring and nuggets
+if (sceneName === 'sniffer') {
+  iconLights(BLOOD, 0xffd27a); iconCam([1.2, 2.6, 8.8], [0.2, -0.55, 0]); pedestal(-1.75, 1.9);
+  const S = essence(R3, { metalness: 0.95, roughness: 0.18 }), dark = new THREE.MeshPhysicalMaterial({ color: 0x0c0c0d, roughness: 0.05, clearcoat: 1 });
+  const B = new THREE.Group(); B.position.set(-0.95, -1.12, 0); B.rotation.y = -0.4; B.scale.setScalar(0.9); scene.add(B);
+  const ab = add(new THREE.SphereGeometry(0.85, 64, 40), S, [-0.45, 0.48, 0], B); ab.scale.set(1.35, 0.72, 0.95);
+  const a = 0.85 * 1.35;
+  [-0.55, 0, 0.5].forEach((dx) => {
+    const k = Math.sqrt(1 - (dx / a) ** 2); const ring = add(new THREE.TorusGeometry(1.02, 0.035, 12, 64), goldM(), [-0.45 + dx, 0.48, 0], B);
+    ring.rotation.y = Math.PI / 2; ring.scale.set(0.85 * 0.95 * k, 0.85 * 0.72 * k, 1);
+  });
+  add(new THREE.SphereGeometry(0.4, 48, 32), S, [0.78, 0.5, 0], B);
+  const head = add(new THREE.SphereGeometry(0.32, 48, 32), S, [1.18, 0.44, 0], B); head.scale.set(1.1, 0.95, 1);
+  const snout = add(new THREE.ConeGeometry(0.12, 0.85, 24), S, [1.72, 0.22, 0], B); snout.rotation.z = -Math.PI / 2 - 0.45;
+  add(new THREE.SphereGeometry(0.055, 16, 16), glowM(0xffd27a, 2.2), [2.1, 0.03, 0], B);
+  [-1, 1].forEach((s) => {
+    add(new THREE.SphereGeometry(0.075, 16, 16), dark, [1.32, 0.58, 0.22 * s], B);
+    const c = new THREE.CatmullRomCurve3([new THREE.Vector3(1.2, 0.7, 0.12 * s), new THREE.Vector3(1.45, 1.2, 0.35 * s), new THREE.Vector3(1.85, 1.35, 0.55 * s)]);
+    add(new THREE.TubeGeometry(c, 24, 0.018, 8), goldM(), [0, 0, 0], B);
+    [0.35, 0.75, 1.05].forEach((x, i) => {
+      const hip = [x - 0.2 * (1 - i), 0.32, 0.28 * s], knee = [x + 0.05 - 0.3 * (1 - i), 0.42, 0.78 * s], foot = [x + 0.15 - 0.5 * (1 - i), -0.5, 1.05 * s];
+      limb(hip, knee, 0.045, S, B); limb(knee, foot, 0.034, S, B);
+    });
+  });
+  // the loot
+  const G = new THREE.Group(); G.position.set(1.15, -1.575, 0.35); scene.add(G);
+  const ring = add(new THREE.TorusGeometry(0.3, 0.075, 24, 64), goldM(), [0, 0.375, 0], G); ring.rotation.y = 0.7;
+  const gem = add(new THREE.OctahedronGeometry(0.13, 0), new THREE.MeshPhysicalMaterial({ color: BLOOD, emissive: BLOOD, emissiveIntensity: 0.5, roughness: 0.05, clearcoat: 1, flatShading: true }), [0, 0.8, 0], G); gem.scale.y = 1.3;
+  [[0.55, 0.08, 0.35, 0.1], [-0.35, 0.07, 0.6, 0.085], [0.5, 0.09, -0.4, 0.12]].forEach(([x, y, z, r]) => { const n = add(new THREE.IcosahedronGeometry(r, 0), goldM(), [x, y, z], G); n.rotation.set(x, z, y); });
+  haloAt(0xffd27a, 6.5, 0);
+}
+
+// Truth-Seeking — a red-steel balance: evidence scrolls weighed against a jade pearl of truth
+if (sceneName === 'scale') {
+  iconLights(BLOOD, JADE); iconCam([0, 1.8, 9], [0, -0.2, 0]); pedestal(-1.9, 1.5);
+  const steel = essence(R2, { metalness: 0.85, roughness: 0.28 }), gold = goldM();
+  add(new THREE.CylinderGeometry(0.4, 0.55, 0.22, 48), steel, [0, -1.62, 0]);
+  add(new THREE.CylinderGeometry(0.06, 0.09, 2.7, 24), steel, [0, -0.2, 0]);
+  add(new THREE.BoxGeometry(3.1, 0.08, 0.08), steel, [0, 1.12, 0]);
+  add(new THREE.SphereGeometry(0.13, 32, 24), gold, [0, 1.12, 0]);
+  const fin = add(new THREE.OctahedronGeometry(0.2, 0), new THREE.MeshPhysicalMaterial({ color: R2, emissive: R2, emissiveIntensity: 0.35, roughness: 0.06, clearcoat: 1, flatShading: true }), [0, 1.48, 0]); fin.scale.y = 1.6;
+  [-1, 1].forEach((s) => {
+    const x = 1.45 * s, top = [x, 1.08, 0], panY = -0.4;
+    add(new THREE.SphereGeometry(0.07, 16, 16), gold, [x, 1.12, 0]);
+    for (let k = 0; k < 3; k++) { const ang = (k / 3) * Math.PI * 2 + 0.4; limb(top, [x + Math.cos(ang) * 0.52, panY + 0.02, Math.sin(ang) * 0.52], 0.008, gold); }
+    const bowl = add(new THREE.SphereGeometry(0.58, 48, 24, 0, Math.PI * 2, Math.PI * 0.62, Math.PI * 0.38), new THREE.MeshPhysicalMaterial({ color: R2, metalness: 0.85, roughness: 0.28, clearcoat: 1, side: THREE.DoubleSide }), [x, panY + 0.45, 0]);
+    const rim = add(new THREE.TorusGeometry(0.535, 0.022, 12, 64), gold, [x, panY + 0.02, 0]); rim.rotation.x = Math.PI / 2;
+    if (s < 0) {
+      const paper = new THREE.MeshStandardMaterial({ color: BONE, roughness: 0.7 });
+      [[-0.12, 0.0, 0.08, 0.3], [0.13, 0.0, -0.06, -0.5], [0.0, 0.11, 0.0, 1.2]].forEach(([dx, dy, dz, ry]) => {
+        const sc = add(new THREE.CylinderGeometry(0.075, 0.075, 0.48, 24), paper, [x + dx, panY + 0.02 + dy, dz]); sc.rotation.set(0, ry, Math.PI / 2);
+        [-1, 1].forEach((e) => { const cap = add(new THREE.CylinderGeometry(0.09, 0.09, 0.04, 24), steel, [0, e * 0.25, 0], sc); });
+      });
+    } else {
+      add(new THREE.SphereGeometry(0.2, 48, 32), new THREE.MeshPhysicalMaterial({ color: JADE, emissive: JADE, emissiveIntensity: 0.9, roughness: 0.05, clearcoat: 1, iridescence: 0.6 }), [x, panY + 0.12, 0]);
+      const g = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTexture('rgba(170,255,220,0.8)', 'rgba(95,211,160,0.3)'), blending: THREE.AdditiveBlending, depthWrite: false })); g.scale.set(1.1, 1.1, 1); g.position.set(x, panY + 0.15, 0.2); scene.add(g);
+    }
+  });
+  haloAt(R2, 6.5, 0.2);
+}
+
+// Silent Link — red-steel beacons joined into a mesh, one jade node sending signal arcs
+if (sceneName === 'mesh') {
+  iconLights(BLOOD, JADE); iconCam([0, 2.4, 8.8], [0, -0.1, 0]); pedestal(-1.8, 1.55);
+  const G = new THREE.Group(); G.position.y = -0.05; G.rotation.set(0.12, 0.3, 0); scene.add(G);
+  const steel = essence(R2, { metalness: 0.85, roughness: 0.22 }), gold = goldM();
+  add(new THREE.IcosahedronGeometry(0.42, 1), new THREE.MeshPhysicalMaterial({ color: R2, metalness: 0.8, roughness: 0.2, clearcoat: 1, flatShading: true, emissive: R2, emissiveIntensity: 0.12 }), [0, 0, 0], G);
+  const nodes = []; const n = 6;
+  for (let i = 0; i < n; i++) { const a = (i / n) * Math.PI * 2; nodes.push([Math.cos(a) * 1.45, Math.sin(i * 1.7) * 0.5, Math.sin(a) * 1.45]); }
+  nodes.push([0.15, 1.3, 0.2]);
+  nodes.forEach((p, i) => {
+    add(new THREE.SphereGeometry(i === 1 ? 0.2 : 0.15, 32, 24), i === 1 ? new THREE.MeshPhysicalMaterial({ color: JADE, emissive: JADE, emissiveIntensity: 1, roughness: 0.1, clearcoat: 1 }) : steel, p, G);
+    limb([0, 0, 0], p, 0.016, gold, G);
+    if (i < n) limb(p, nodes[(i + 1) % n], 0.012, gold, G);
+  });
+  // signal arcs from the jade node, facing outward
+  const J = new THREE.Vector3(...nodes[1]); const out = J.clone().setY(0).normalize();
+  [0.35, 0.55, 0.75].forEach((r, k) => {
+    const arc = add(new THREE.TorusGeometry(r, 0.018, 8, 48, Math.PI * 0.55), new THREE.MeshStandardMaterial({ color: JADE, emissive: JADE, emissiveIntensity: 1.6 - k * 0.4, transparent: true, opacity: 1 - k * 0.25 }), [J.x, J.y, J.z], G);
+    arc.rotation.set(0, -Math.atan2(out.z, out.x), -Math.PI * 0.275); arc.castShadow = false;
+  });
+  // faint pulse rings on the ground plane of the mesh
+  [0.75, 1.1].forEach((r, k) => { const ring = add(new THREE.TorusGeometry(r, 0.01, 8, 128), new THREE.MeshStandardMaterial({ color: R2, emissive: R2, emissiveIntensity: 1.2, transparent: true, opacity: 0.55 - k * 0.2 }), [0, 0, 0], G); ring.rotation.x = Math.PI / 2; ring.castShadow = false; });
+  haloAt(R2, 6.5, 0.2);
+}
+
+// Bookworm — a green-copper worm (in spectacles) burrowing out of a stack of novels
+if (sceneName === 'bookworm') {
+  iconLights(BLOOD, JADE); iconCam([0, 2.5, 8.8], [0, -0.35, 0]); pedestal(-1.75, 1.75);
+  const pages = new THREE.MeshStandardMaterial({ color: BONE, roughness: 0.8 });
+  let y = -1.575; let top;
+  [[0x2a2f2c, 0.36, 0.08], [0x6a2a24, 0.32, -0.12], [0x2f4f3f, 0.34, 0.1]].forEach(([c, h, ry]) => {
+    const b = new THREE.Group(); b.position.y = y + h / 2; b.rotation.y = ry; scene.add(b);
+    add(new RoundedBoxGeometry(2.1, h, 1.5, 3, 0.04), new THREE.MeshPhysicalMaterial({ color: c, roughness: 0.55, clearcoat: 0.3 }), [0, 0, 0], b);
+    add(new THREE.BoxGeometry(1.96, h * 0.78, 1.44), pages, [0.08, 0, 0.05], b);
+    add(new THREE.BoxGeometry(0.06, h * 0.86, 1.52), goldM(), [-0.95, 0, 0], b);
+    y += h; top = y;
+  });
+  const hole = new THREE.Mesh(new THREE.CircleGeometry(0.3, 48), new THREE.MeshBasicMaterial({ color: 0x050505 })); hole.rotation.x = -Math.PI / 2; hole.position.set(0.15, top + 0.003, 0.1); scene.add(hole);
+  const curve = new THREE.CatmullRomCurve3([[0.15, top - 0.2, 0.1], [0.12, top + 0.55, 0.05], [0.32, top + 1.25, 0.3], [0.8, top + 1.38, 0.75], [0.95, top + 1.08, 1.35]].map((p) => new THREE.Vector3(...p)));
+  const h = wormBody(curve, 22, 0.27, essence(R1, { metalness: 0.75, roughness: 0.28 }), goldM());
+  const side = new THREE.Vector3().crossVectors(h.tan, new THREE.Vector3(0, 1, 0)).normalize();
+  const eyeM = glowM(0xffe2a0, 2.2), rimM = goldM();
+  [-1, 1].forEach((s) => {
+    const e = h.p.clone().add(side.clone().multiplyScalar(0.12 * s)).add(new THREE.Vector3(0, 0.1, 0)).add(h.tan.clone().multiplyScalar(0.25));
+    add(new THREE.SphereGeometry(0.045, 16, 16), eyeM, [e.x, e.y, e.z]);
+    const lens = add(new THREE.TorusGeometry(0.085, 0.012, 8, 32), rimM, [0, 0, 0]); lens.position.copy(e.clone().add(h.tan.clone().multiplyScalar(0.05))); lens.lookAt(lens.position.clone().add(h.tan));
+  });
+  haloAt(R1, 6.5, 0.1);
+}
+
+// Elimination — an upper-triangular staircase of copper blocks; the eliminated cells dissolve upward
+if (sceneName === 'elimination') {
+  iconLights(BLOOD, JADE); iconCam([0, 3.4, 8.4], [0, -0.55, 0]); pedestal(-1.75, 1.75);
+  const G = new THREE.Group(); G.position.y = -1.575; G.rotation.y = -0.62; scene.add(G);
+  const cu = essence(R1, { metalness: 0.75, roughness: 0.3 }), piv = new THREE.MeshPhysicalMaterial({ color: GOLD, metalness: 1, roughness: 0.2, clearcoat: 1, emissive: 0x6a4410, emissiveIntensity: 0.8 });
+  const s = 0.5, gap = 0.07, n = 4, off = ((n - 1) * (s + gap)) / 2;
+  for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) {
+    const x = j * (s + gap) - off, z = i * (s + gap) - off;
+    if (j >= i) {
+      const levels = j - i + 1;
+      for (let k = 0; k < levels; k++) add(new RoundedBoxGeometry(s, s, s, 3, 0.04), j === i && k === levels - 1 ? piv : cu, [x, s / 2 + k * (s + 0.02), z], G);
+    } else {
+      // dissolving shards where a value was eliminated to zero
+      const ghost = new THREE.MeshPhysicalMaterial({ color: R1, metalness: 0.6, roughness: 0.3, transparent: true, opacity: 0.45, emissive: R1, emissiveIntensity: 0.3 });
+      [[0, 0.12, 0, 0.22], [0.08, 0.55, -0.05, 0.14], [-0.06, 0.95, 0.05, 0.08]].forEach(([dx, yy, dz, sz], q) => { const m = add(new THREE.BoxGeometry(sz, sz, sz), ghost, [x + dx, yy + (i - j) * 0.08, z + dz], G); m.rotation.set(q + i, q * 0.7 + j, 0.4 * q); m.castShadow = false; });
+    }
+  }
+  haloAt(R1, 6.5, 0);
+}
+
 function draw() { if (composer) composer.render(); else renderer.render(scene, camera); }
 draw(); setTimeout(() => { draw(); window.__done = true; }, 300);
 </script>

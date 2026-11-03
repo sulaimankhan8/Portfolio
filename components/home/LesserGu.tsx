@@ -45,15 +45,15 @@ export function LesserGu({ gu }: { gu: Gu[] }) {
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-1">
-                  {e.crystal && (
+                  {(g.emblem || e.crystal) && (
                     <Image
-                      src={e.crystal}
+                      src={g.emblem?.src ?? e.crystal!}
                       alt=""
                       aria-hidden
-                      width={460}
-                      height={520}
-                      sizes="64px"
-                      className="-my-2 -ml-2.5 h-[72px] w-16 object-contain"
+                      width={g.emblem?.width ?? 460}
+                      height={g.emblem?.height ?? 520}
+                      sizes="72px"
+                      className="-my-2 -ml-2.5 h-[72px] w-[68px] object-contain"
                     />
                   )}
                   <Glyph className="text-[40px]" color={e.color}>
