@@ -76,15 +76,16 @@ export function Hero() {
           <ul className={`m-0 flex list-none flex-wrap gap-5 p-0 text-[13px] md:gap-7 ${monoCls}`}>
             {NAV.map((n) => (
               <li key={n.href}>
-                <a href={n.href} className="text-bone no-underline hover:text-ember">
-                  {n.label}
+                <a href={n.href} className="group flex flex-col items-center gap-0.5 text-bone no-underline hover:text-bone">
+                  <span className="transition-colors group-hover:text-ember">{n.label}</span>
+                  <span className="text-[9px] tracking-[0.2em] text-mist">{n.plain}</span>
                 </a>
               </li>
             ))}
           </ul>
         </nav>
 
-        <div className="flex max-w-[640px] flex-1 flex-col justify-center gap-6 pb-28">
+        <div className="hero-enter flex max-w-[640px] flex-1 flex-col justify-center gap-6 pb-28">
           <p className={`m-0 text-[12px] tracking-[0.24em] text-ember md:text-[13px] ${monoCls}`}>
             Rank 5 · {SITE.role} · {SITE.city}
           </p>
@@ -95,9 +96,11 @@ export function Hero() {
           </h1>
           <p className="m-0 max-w-[520px] text-lg leading-relaxed text-bone-dim md:text-xl">{SITE.tagline}</p>
           <div className="flex flex-wrap gap-3 pt-2">
-            <Button href="#major">Enter the aperture</Button>
+            <Button href="#major">
+              Enter the aperture <span className="ml-1.5">· Projects</span>
+            </Button>
             <Button href="#summon" variant="ghost">
-              Summon
+              Summon <span className="ml-1.5 opacity-65">· Contact</span>
             </Button>
           </div>
         </div>

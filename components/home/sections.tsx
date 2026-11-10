@@ -17,7 +17,7 @@ export function Ascent() {
   return (
     <section aria-labelledby="ascent-title">
       <SectionHeader numeral="境" title="The ascent" id="ascent-title" kicker="Rank 1 to Rank 5 · keeping only what earned its place" />
-      <ol className="m-0 grid list-none gap-10 p-0 md:grid-cols-5 md:gap-0">
+      <ol data-stagger="slow" className="m-0 grid list-none gap-10 p-0 md:grid-cols-5 md:gap-0">
         {ASCENT.map((r) => {
           const e = ESSENCE[r.rank];
           return (
@@ -54,7 +54,7 @@ export function MajorGu() {
 
       <Link
         href={`/gu/${vital.slug}`}
-        className="grid items-center gap-8 border border-gold vital-card p-6 text-bone no-underline hover:text-bone md:grid-cols-[280px_minmax(0,1fr)_auto] md:p-10"
+        className="group grid items-center gap-8 border border-gold vital-card p-6 text-bone no-underline hover:text-bone md:grid-cols-[280px_minmax(0,1fr)_auto] md:p-10"
       >
         {vital.emblem && (
           <Image
@@ -63,7 +63,7 @@ export function MajorGu() {
             width={vital.emblem.width}
             height={vital.emblem.height}
             sizes="280px"
-            className="mx-auto h-[260px] w-auto object-contain drop-shadow-[0_24px_40px_rgba(0,0,0,0.6)] md:h-[300px]"
+            className="mx-auto h-[260px] w-auto object-contain drop-shadow-[0_24px_40px_rgba(0,0,0,0.6)] transition-transform duration-500 ease-ink group-hover:-translate-y-1.5 motion-reduce:transition-none motion-reduce:group-hover:translate-y-0 md:h-[300px]"
           />
         )}
         <div className="flex flex-col gap-3">
@@ -78,11 +78,17 @@ export function MajorGu() {
         <span
           className={`inline-flex min-h-12 items-center justify-self-start bg-blood px-6 text-[13px] text-bone md:justify-self-end ${monoCls}`}
         >
-          Dossier →
+          Dossier{" "}
+          <span
+            aria-hidden
+            className="ml-1 transition-transform duration-300 ease-ink group-hover:translate-x-1 motion-reduce:transition-none"
+          >
+            →
+          </span>
         </span>
       </Link>
 
-      <div className="mt-4 grid gap-4 md:grid-cols-2">
+      <div data-stagger className="mt-4 grid gap-4 md:grid-cols-2">
         {rest.map((g) => {
           const e = ESSENCE[g.rank];
           return (
@@ -164,7 +170,7 @@ export function Battles() {
     <section id="battles" className="grid scroll-mt-8 gap-12 md:grid-cols-[1.4fr_1fr]">
       <div>
         <SectionHeader numeral="四" title="Battle record" />
-        <ul className="m-0 flex list-none flex-col gap-5 p-0">
+        <ul data-stagger className="m-0 flex list-none flex-col gap-5 p-0">
           {BATTLES.map((b) => (
             <li key={b.title} className="grid grid-cols-[72px_minmax(0,1fr)] items-center gap-5 border-b border-line pb-5">
               <Seal glyph={b.glyph} variant="outline" size={60} />
@@ -204,7 +210,7 @@ export function Arsenal() {
   return (
     <section aria-labelledby="arsenal-title" id="arsenal" className="scroll-mt-8">
       <SectionHeader numeral="六" title="Gu arsenal" id="arsenal-title" kicker="Skills" />
-      <div className="grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-3">
+      <div data-stagger className="grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-3">
         {ARSENAL.map((a) => (
           <div key={a.group} className="flex flex-col gap-3.5 bg-ink p-6">
             <div className="flex items-center gap-3">

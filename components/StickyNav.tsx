@@ -29,7 +29,12 @@ export function StickyNav() {
         <ul className="m-0 flex list-none gap-4 p-0 font-mono text-[12px] uppercase tracking-[0.12em] md:gap-7">
           {NAV.map((n) => (
             <li key={n.href} className={n.mobile ? "" : "hidden sm:block"}>
-              <a href={n.href} className="inline-flex min-h-11 items-center text-bone no-underline hover:text-ember">
+              <a
+                href={n.href}
+                title={n.plain}
+                aria-label={`${n.label} — ${n.plain}`}
+                className="inline-flex min-h-11 items-center text-bone no-underline hover:text-ember"
+              >
                 {n.label}
               </a>
             </li>

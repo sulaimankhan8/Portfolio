@@ -15,8 +15,9 @@ export const GU: Gu[] = [
     glyph: "力",
     emblem: { src: "/gu/worm.webp", alt: "Gold Gu worm coiled on a stone pedestal", width: 781, height: 900 },
     liveUrl: "https://demo-discord-seven.vercel.app/",
+    repoUrl: "https://github.com/sulaimankhan8/demo-discord",
     ability:
-      "Horizontally scalable messaging built to study how large chat systems stay fast — ~16K messages/sec under load testing. Now also an Android, iOS and Windows app whose chat keeps working over a Bluetooth mesh when the internet is gone.",
+      "Horizontally scalable messaging — ~16K messages/sec in load tests. Now an Android, iOS and Windows app whose chat keeps working over a Bluetooth mesh when the internet is gone.",
     diet: "WebSocket events, WebRTC tracks, Bluetooth LE packets",
     stack: "Socket.IO · Redis Streams · BullMQ · Mediasoup SFU · Postgres · BLE mesh · Capacitor · Wails",
     dossier: {
@@ -26,14 +27,12 @@ export const GU: Gu[] = [
       abilityLong:
         "One engine for text, voice and video. Any server instance can reach any user, every message is written durably before it touches the database, and bursts are absorbed instead of dropped. When the internet drops, phones and PCs nearby carry the chat between themselves over Bluetooth.",
       bullets: [
-        "Redis Pub/Sub links Socket.IO across multiple instances — scale out horizontally.",
-        "Redis Streams act as a write-ahead log for durable event persistence and recovery.",
+        "Redis Pub/Sub fans Socket.IO out across instances; Redis Streams are the write-ahead log, so events survive crashes.",
         "BullMQ workers handle notifications, retries and background work; failures go to a dead-letter queue.",
         "Mediasoup v3 SFU for voice & video with active-speaker detection.",
-        "Presence service, batching and adaptive flushing keep the hot path fast.",
-        "Offline Bluetooth mesh: signed messages hop phone to phone (up to 7 hops) and late arrivals catch up on history — tested on real phones, Android ↔ Android, three in a line, and iPhone ↔ Android.",
-        "Private mesh channels and direct messages are end-to-end encrypted (X25519 + XChaCha20-Poly1305); an internet bridge joins distant meshes while the server only sees ciphertext.",
-        "One Next.js frontend ships as the website, an Android and iOS app (Capacitor 8 with native Java and Swift Bluetooth plugins) and a ~14 MB Windows app (Wails + Go).",
+        "Offline Bluetooth mesh: signed messages hop phone to phone (up to 7 hops), late arrivals catch up on history — tested on real Android and iPhone hardware.",
+        "Mesh DMs and private channels are end-to-end encrypted (X25519 + XChaCha20-Poly1305); an internet bridge joins distant meshes, and the server sees only ciphertext.",
+        "One Next.js frontend ships as the website, Android and iOS apps (Capacitor 8, native Java and Swift Bluetooth plugins) and a ~14 MB Windows app (Wails + Go).",
       ],
       stats: [
         { value: "~16K", lore: "Voices per second", plain: "Messages/sec sustained in Artillery load tests" },
@@ -118,6 +117,7 @@ export const GU: Gu[] = [
     glyph: "信",
     emblem: { src: "/gu/netz.webp", alt: "Yellow-gold crystal circled by golden orbit rings", width: 709, height: 800 },
     liveUrl: "https://netz-ruby.vercel.app/",
+    repoUrl: "https://github.com/sulaimankhan8/Netz",
     ability:
       "Founded Aug 2024; 5,000+ monthly users at its peak. Rebuilt in Oct 2026: 34 solvers, a handwriting whiteboard that reads your maths, notes, and daily tasks.",
     diet: "equations, matrices, handwritten ink, practice attempts",
@@ -192,13 +192,14 @@ export const GU: Gu[] = [
     glyph: "律",
     emblem: { src: "/gu/seal.webp", alt: "Silver seal stamp beside a red 律 imprint", width: 900, height: 536 },
     liveUrl: "https://signaturly.vercel.app/",
+    repoUrl: "https://github.com/sulaimankhan8/Signaturly",
     ability:
       "Send a document, get back a sealed copy and a record of who signed and when. India-first: rupee pricing, English & Hindi signing.",
     diet: "documents, signer identities, email links",
     dossier: {
       index: "Dossier 03 / 03",
       statusLabel: "In refinement · pre-launch",
-      problem: "Send a document for signature; get back a sealed copy and a record of who signed it, and when.",
+      problem: "Most agreements in India are still print, sign, scan, email — with no proof of who signed what, or when.",
       abilityLong:
         "A secure digital-signature and document workflow, built India-first, with ready-made templates for rentals, housing societies, HR and small firms.",
       bullets: [

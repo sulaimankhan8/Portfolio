@@ -82,7 +82,7 @@
     transition: color 160ms;
   }
   a:hover {
-    color: #ff8378;
+    color: color-mix(in srgb, var(--color-ember) 72%, var(--color-bone));
   }
   :focus-visible {
     outline: 2px solid var(--color-jade);
@@ -168,6 +168,10 @@
 .vital-card {
   background: radial-gradient(ellipse at 18% 40%, var(--vital-wash), transparent 55%), var(--color-void);
   box-shadow: 0 0 80px var(--vital-glow);
+  transition: box-shadow 500ms var(--ease-ink);
+}
+.vital-card:hover {
+  box-shadow: 0 0 130px var(--vital-glow);
 }
 
 /* ---- Righteous clouds: tiles slide one tile-width per loop (seamless), compositor-only ---- */
@@ -376,6 +380,115 @@
   transform: translateY(12px);
 }
 
+/* ---- Shared rise-up entrance (hero text, staggered reveal children) ---- */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+/* Hero text: name, tagline and buttons fade up once on first paint */
+.hero-enter > * {
+  animation: rise-in 600ms var(--ease-ink) backwards;
+}
+.hero-enter > :nth-child(2) {
+  animation-delay: 90ms;
+}
+.hero-enter > :nth-child(3) {
+  animation-delay: 180ms;
+}
+.hero-enter > :nth-child(4) {
+  animation-delay: 270ms;
+}
+
+/* Staggered reveal: once Reveal.tsx swaps .reveal-pending for .reveal-in, children of a
+   [data-stagger] container arrive one after another. Animations (not transitions), so
+   hover transitions on the same elements are untouched. A re-keyed [data-stagger] list
+   (the Lesser Gu filter) replays the cascade. */
+.reveal-in [data-stagger] > * {
+  animation: rise-in 520ms var(--ease-ink) backwards;
+}
+.reveal-in [data-stagger] > :nth-child(2) {
+  animation-delay: 80ms;
+}
+.reveal-in [data-stagger] > :nth-child(3) {
+  animation-delay: 160ms;
+}
+.reveal-in [data-stagger] > :nth-child(4) {
+  animation-delay: 240ms;
+}
+.reveal-in [data-stagger] > :nth-child(5) {
+  animation-delay: 320ms;
+}
+.reveal-in [data-stagger] > :nth-child(n + 6) {
+  animation-delay: 400ms;
+}
+/* slower cadence for timelines, where the sequence is the point */
+.reveal-in [data-stagger="slow"] > :nth-child(2) {
+  animation-delay: 150ms;
+}
+.reveal-in [data-stagger="slow"] > :nth-child(3) {
+  animation-delay: 300ms;
+}
+.reveal-in [data-stagger="slow"] > :nth-child(4) {
+  animation-delay: 450ms;
+}
+.reveal-in [data-stagger="slow"] > :nth-child(5) {
+  animation-delay: 600ms;
+}
+.reveal-in [data-stagger="slow"] > :nth-child(n + 6) {
+  animation-delay: 750ms;
+}
+
+/* ---- Micro-interactions ---- */
+
+/* one-shot cross-fade for the dossier gallery's main image (remounted per screen) */
+.anim-fade {
+  animation: fade-in 300ms var(--ease-ink) backwards;
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Lesser Gu cards: essence-coloured border + glow + lift, colour via --glow (a token) */
+.gu-card {
+  transition:
+    border-color 300ms var(--ease-ink),
+    box-shadow 300ms var(--ease-ink),
+    transform 300ms var(--ease-ink);
+}
+.gu-card:hover {
+  border-color: color-mix(in srgb, var(--glow) 55%, var(--color-line));
+  box-shadow: 0 0 36px color-mix(in srgb, var(--glow) 14%, transparent);
+  transform: translateY(-2px);
+}
+
+/* ---- Dossier header: the essence ring turns imperceptibly; the emblem breathes ---- */
+.ring-spin {
+  animation: spin-slow 80s linear infinite;
+  transform-origin: 50% 50%;
+}
+@keyframes spin-slow {
+  to {
+    transform: rotate(1turn);
+  }
+}
+.float-slow {
+  animation: float-y 7s ease-in-out infinite;
+}
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
 /* Single glint pulse (the Gu in the hero) */
 @keyframes glint {
   0%,
@@ -402,8 +515,16 @@
   /* quotes keep cross-fading: an opacity fade, not movement */
   .rain-far,
   .rain-near,
-  .glint {
+  .glint,
+  .ring-spin,
+  .float-slow,
+  .anim-fade,
+  .hero-enter > *,
+  .reveal-in [data-stagger] > * {
     animation: none;
+  }
+  .gu-card:hover {
+    transform: none;
   }
   html {
     scroll-behavior: auto;

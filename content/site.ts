@@ -46,10 +46,12 @@ export const SITE = {
   knowsAbout: ["Node.js", "TypeScript", "Socket.IO", "Redis", "BullMQ", "PostgreSQL", "Docker", "System design", "Real-time systems"],
 };
 
+/** `plain` keeps the lore labels readable for visitors who haven't read the novel. */
 export const NAV = [
-  { href: "#major", label: "Gu", mobile: true },
-  { href: "#sects", label: "Sects", mobile: true },
-  { href: "#battles", label: "Battles", mobile: false },
-  { href: "#arsenal", label: "Arsenal", mobile: false },
-  { href: "#summon", label: "Summon", mobile: true },
+  { href: "#major", label: "Gu", plain: "Projects", mobile: true },
+  { href: "#sects", label: "Sects", plain: "Experience", mobile: true },
+  { href: "#battles", label: "Battles", plain: "Wins", mobile: false },
+  { href: "#arsenal", label: "Arsenal", plain: "Skills", mobile: false },
+  { href: "#summon", label: "Summon", plain: "Contact", mobile: true },
+  { href: SITE.resume, label: "Résumé", plain: "PDF", mobile: false },
 ];

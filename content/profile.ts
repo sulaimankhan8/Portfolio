@@ -14,14 +14,14 @@ export const ASCENT: { rank: Rank; title: string; where: string; when: string; g
     title: "Full-time Developer",
     where: "Docnish",
     when: "2025",
-    gain: "Converted to full-time. Architected backend and frontend from scratch.",
+    gain: "Converted to full-time. Trusted with the architecture.",
   },
   {
     rank: 3,
     title: "Project Co-Lead",
     where: "Docnish",
     when: "to Dec 2025",
-    gain: "Co-led nine products. 32K+ payments through infrastructure I designed.",
+    gain: "Co-led nine products end to end, booking to payments.",
   },
   {
     rank: 4,
@@ -35,7 +35,7 @@ export const ASCENT: { rank: Rank; title: string; where: string; when: string; g
     title: "Backend Engineer",
     where: "Distributed systems",
     when: "Now",
-    gain: "Real-time systems at scale — ~16K msg/s in load tests. Rank 6 is next.",
+    gain: "Distributed real-time systems at scale. Rank 6 is next.",
   },
 ];
 

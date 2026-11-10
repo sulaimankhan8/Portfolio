@@ -26,11 +26,11 @@ export function Gallery({ shots, host, note, accent }: { shots: Shot[]; host: st
             width={shot.width}
             height={shot.height}
             sizes="(max-width: 1200px) 100vw, 1136px"
-            className={tall ? "h-[560px] w-auto" : "block h-auto w-full"}
+            className={`anim-fade ${tall ? "h-[560px] w-auto" : "block h-auto w-full"}`}
           />
         </div>
       </BrowserFrame>
-      <div role="group" aria-label="Choose a screen" className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <div role="group" aria-label="Choose a screen" className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
         {shots.map((s, n) => {
           const on = n === i;
           return (
@@ -40,7 +40,7 @@ export function Gallery({ shots, host, note, accent }: { shots: Shot[]; host: st
               aria-pressed={on}
               aria-label={s.caption}
               onClick={() => setI(n)}
-              className="flex cursor-pointer flex-col gap-2 border bg-ink p-0 text-left transition-opacity"
+              className="flex cursor-pointer flex-col gap-2 border bg-ink p-0 text-left transition-[opacity,border-color] duration-300 ease-ink hover:opacity-100"
               style={{ borderColor: on ? accent : "var(--color-line)", opacity: on ? 1 : 0.7 }}
             >
               <Image

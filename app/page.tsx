@@ -55,7 +55,9 @@ export default function Home() {
       <StickyNav />
       <Hero />
       <main id="main" className="mx-auto flex max-w-[1200px] flex-col gap-28 px-4 pb-20 md:px-8">
-        <Highlights />
+        <Reveal>
+          <Highlights />
+        </Reveal>
         <Reveal>
           <Ascent />
         </Reveal>

@@ -1,0 +1,32 @@
+name: Refresh profile
+
+on:
+  schedule:
+    - cron: "30 2 * * *" # daily, 08:00 IST
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["scripts/**", "assets/ascii.txt"]
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Rebuild card and shipping log
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/update.py
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md assets/card-*.svg
+          git diff --cached --quiet || git commit -m "chore: refresh profile card and shipping log"
+          git push

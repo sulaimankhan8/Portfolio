@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { CountUp } from "@/components/CountUp";
 import { ESSENCE, STATUS } from "@/content/essence";
 import type { Rank, Status } from "@/content/types";
 
@@ -11,7 +12,7 @@ export function Button({ href, children, variant = "primary" }: { href: string; 
     variant === "primary"
       ? "bg-blood text-bone hover:bg-blood-hover hover:text-bone"
       : "border border-line-strong text-bone hover:border-bone hover:text-bone";
-  const className = `inline-flex min-h-12 items-center px-6 text-[13px] no-underline transition-colors ${mono} ${cls}`;
+  const className = `inline-flex min-h-12 items-center px-6 text-[13px] no-underline transition-colors active:translate-y-px motion-reduce:active:translate-y-0 ${mono} ${cls}`;
   return external ? (
     <a href={href} className={className} target="_blank" rel="noreferrer">
       {children}
@@ -107,11 +108,13 @@ export function StatStrip({
   accent?: string;
 }) {
   return (
-    <dl className="grid grid-cols-2 gap-px bg-line lg:grid-cols-4">
+    <dl data-stagger className="grid grid-cols-2 gap-px bg-line lg:grid-cols-4">
       {items.map((s) => (
         <div key={s.lore} className="flex flex-col gap-2 bg-ink px-6 py-7">
           <dt className="sr-only">{s.plain}</dt>
-          <dd className="m-0 font-display text-[44px] font-bold leading-none md:text-[56px]">{s.value}</dd>
+          <dd className="m-0 font-display text-[44px] font-bold leading-none md:text-[56px]">
+            <CountUp value={s.value} />
+          </dd>
           <dd className={`m-0 text-[11px] ${mono}`} style={{ color: accent }}>
             {s.lore}
           </dd>

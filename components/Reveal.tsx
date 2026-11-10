@@ -21,10 +21,13 @@ export function Reveal({ children, className = "" }: { children: ReactNode; clas
       ([entry]) => {
         if (entry.isIntersecting) {
           el.classList.remove("reveal-pending");
+          // lets [data-stagger] children cascade in (see globals.css)
+          el.classList.add("reveal-in");
           io.disconnect();
         }
       },
-      { rootMargin: "0px 0px -10% 0px" },
+      // start slightly before the section enters, so fast scrolling never meets a blank page
+      { rootMargin: "0px 0px 12% 0px" },
     );
     io.observe(el);
     return () => io.disconnect();

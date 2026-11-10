@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import { Glyph, SectionHeader, StatusTag, monoCls } from "@/components/ui";
 import { ESSENCE, PATHS } from "@/content/essence";
 import type { Gu, Path } from "@/content/types";
@@ -35,13 +35,15 @@ export function LesserGu({ gu }: { gu: Gu[] }) {
         })}
       </div>
 
-      <ul className="m-0 grid list-none gap-4 p-0 sm:grid-cols-2 lg:grid-cols-3" aria-live="polite">
+      {/* key={path}: re-filtering remounts the list, so the stagger cascade replays */}
+      <ul key={path} data-stagger className="m-0 grid list-none gap-4 p-0 sm:grid-cols-2 lg:grid-cols-3" aria-live="polite">
         {shown.map((g) => {
           const e = ESSENCE[g.rank];
           return (
             <li
               key={g.slug}
-              className="flex flex-col gap-3 border border-line bg-void p-7 transition-shadow hover:shadow-[0_0_40px_rgba(95,211,160,0.12)]"
+              className="gu-card flex flex-col gap-3 border border-line bg-void p-7"
+              style={{ "--glow": e.color } as CSSProperties}
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-1">

@@ -1,0 +1,28 @@
+name: Contribution snake
+
+on:
+  schedule:
+    - cron: "0 3 * * *" # daily
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  snake:
+    runs-on: ubuntu-latest
+    steps:
+      # colours follow the portfolio: blood/ember on the dark path, gold on the light path
+      - uses: Platane/snk@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/snake-dark.svg?color_snake=#e5554a&color_dots=#161b22,#4a1512,#7a1d17,#b8261f,#e5554a
+            dist/snake-light.svg?color_snake=#7a5810&color_dots=#ebedf0,#efe3c4,#dcc287,#c99a3b,#7a5810
+      - uses: crazy-max/ghaction-github-pages@v5
+        with:
+          target_branch: output
+          build_dir: dist
+          keep_history: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
