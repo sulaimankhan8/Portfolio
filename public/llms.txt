@@ -10,7 +10,8 @@ Mohd Sulaiman Khan (Sulaiman Khan) is a backend engineer based in Lucknow, India
 - GitHub: https://github.com/sulaimankhan8
 - LinkedIn: https://www.linkedin.com/in/suleman-khan-b4ab2b275
 - Email: sulaimanclass12b@gmail.com
-- Résumé: https://www.sulaimankhan.site/resume_sulaiman.pdf
+- Résumé (2 pages): https://www.sulaimankhan.site/resume_sulaiman.pdf
+- CV (4 pages): https://www.sulaimankhan.site/cv_sulaiman.pdf
 
 ## Core Stack
 
@@ -22,7 +23,7 @@ Mohd Sulaiman Khan (Sulaiman Khan) is a backend engineer based in Lucknow, India
 
 ## Key Projects & Case Studies
 
-- Myriad Voices: Distributed real-time messaging, voice, video platform (~16K msg/sec sustained in Artillery load tests) with an offline Bluetooth LE multi-hop mesh (up to 7 hops, end-to-end encrypted via X25519 + XChaCha20-Poly1305). Case study: https://www.sulaimankhan.site/gu/myriad-voices
-- Netz: Interactive numerical methods learning platform with 34 mathematical solvers, step-by-step working, and on-device ONNX handwriting recognition. Reached 5,000+ monthly learners. Case study: https://www.sulaimankhan.site/gu/numeral-insight
+- Myriad Voices: Distributed real-time messaging, voice, video platform (~16K msg/sec sustained in Artillery load tests) with an offline Bluetooth LE multi-hop mesh (up to 7 hops, end-to-end encrypted via X25519 + XChaCha20-Poly1305). Case study: https://www.sulaimankhan.site/gu/myriad-voices — Live demo: https://demodiscord.vercel.app/
+- Netz: Interactive numerical methods learning platform with 34 mathematical solvers, step-by-step working, and on-device ONNX handwriting recognition. Reached 5,000+ monthly learners. Case study: https://www.sulaimankhan.site/gu/numeral-insight — Live site: https://netzmath.vercel.app/
 - PactDoc (Blood Seal): Self-hosted document signing platform with chained audit logs, sealed PDFs, team workspaces, public API with webhooks, and Razorpay billing. Case study: https://www.sulaimankhan.site/gu/blood-seal
 

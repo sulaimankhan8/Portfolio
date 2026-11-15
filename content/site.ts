@@ -43,7 +43,29 @@ export const SITE = {
   ],
   worksFor: "Techdock Labs",
   alumniOf: "Integral University",
-  knowsAbout: ["Node.js", "TypeScript", "Socket.IO", "Redis", "BullMQ", "PostgreSQL", "Docker", "System design", "Real-time systems"],
+  knowsAbout: [
+    "Node.js",
+    "TypeScript",
+    "Go",
+    "Socket.IO",
+    "WebRTC",
+    "Redis",
+    "BullMQ",
+    "PostgreSQL",
+    "Docker",
+    "System design",
+    "Real-time systems",
+    "Payment gateway integration",
+    "Bluetooth Low Energy mesh networking",
+  ],
+};
+
+/** Last significant content update per page (used by the sitemap and structured data). */
+export const UPDATED: Record<string, string> = {
+  root: "2026-11-16",
+  "myriad-voices": "2026-11-15",
+  "numeral-insight": "2026-11-15",
+  "blood-seal": "2026-10-26",
 };
 
 /** `plain` keeps the lore labels readable for visitors who haven't read the novel. */

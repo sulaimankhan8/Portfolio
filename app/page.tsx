@@ -6,7 +6,7 @@ import { Summon } from "@/components/home/Summon";
 import { Reveal } from "@/components/Reveal";
 import { StickyNav } from "@/components/StickyNav";
 import { LESSER_GU } from "@/content/gu";
-import { SITE } from "@/content/site";
+import { SITE, UPDATED } from "@/content/site";
 
 /** Structured data: who this is (Person), the site, and that the page is a profile —
  *  lets search engines show a name/knowledge panel and link GitHub + LinkedIn. */
@@ -42,6 +42,7 @@ const personLd = {
       "@id": `${SITE.url}/#profile`,
       url: SITE.url,
       name: `${SITE.name} — ${SITE.role}`,
+      dateModified: UPDATED.root,
       isPartOf: { "@id": `${SITE.url}/#website` },
       mainEntity: { "@id": `${SITE.url}/#person` },
     },

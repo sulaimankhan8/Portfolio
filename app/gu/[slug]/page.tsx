@@ -8,7 +8,7 @@ import { Reveal } from "@/components/Reveal";
 import { Glyph, RankBadge, StatStrip, monoCls } from "@/components/ui";
 import { ESSENCE, PATHS, STATUS } from "@/content/essence";
 import { MAJOR_GU, getGu } from "@/content/gu";
-import { SITE } from "@/content/site";
+import { SITE, UPDATED } from "@/content/site";
 import type { RecordKind } from "@/content/types";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -57,6 +57,7 @@ function dossierLd(g: NonNullable<ReturnType<typeof getGu>>) {
         image: `${url}/opengraph-image`,
         ...(g.stack ? { keywords: g.stack.split(" · ").join(", ") } : {}),
         ...(g.liveUrl ? { sameAs: g.liveUrl } : {}),
+        ...(UPDATED[g.slug] ? { dateModified: UPDATED[g.slug] } : {}),
         author: { "@type": "Person", "@id": `${SITE.url}/#person`, name: SITE.fullName, url: SITE.url },
       },
     ],
