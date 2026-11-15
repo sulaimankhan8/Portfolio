@@ -68,7 +68,30 @@ export function Summon() {
           <a href={SITE.linkedin} target="_blank" rel="noreferrer">
             LinkedIn
           </a>
-          <a href={SITE.resume}>Résumé (PDF)</a>
+        </div>
+        <div className="flex flex-col gap-3">
+          <p className={`m-0 text-[12px] text-mist ${monoCls}`}>
+            <span aria-hidden="true" className="font-brush text-[16px]">
+              卷
+            </span>{" "}
+            Scrolls — take one with you
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <a
+              href={SITE.resume}
+              download="Sulaiman_Khan_Resume.pdf"
+              className={`min-h-11 inline-flex items-center border border-line-strong px-4 text-[12px] text-bone no-underline transition-colors hover:border-bone ${monoCls}`}
+            >
+              Résumé · 2 pages (PDF)
+            </a>
+            <a
+              href={SITE.cv}
+              download="Sulaiman_Khan_CV.pdf"
+              className={`min-h-11 inline-flex items-center border border-line-strong px-4 text-[12px] text-bone no-underline transition-colors hover:border-bone ${monoCls}`}
+            >
+              CV · 4 pages (PDF)
+            </a>
+          </div>
         </div>
       </div>
 

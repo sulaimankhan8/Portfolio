@@ -17,8 +17,9 @@ export const SITE = {
   email: "sulaimanclass12b@gmail.com",
   github: "https://github.com/sulaimankhan8",
   linkedin: "https://www.linkedin.com/in/suleman-khan-b4ab2b275",
-  /** the current PDF lives at public/resume_sulaiman.pdf */
+  /** 2-page résumé at public/resume_sulaiman.pdf; 4-page CV at public/cv_sulaiman.pdf */
   resume: "/resume_sulaiman.pdf",
+  cv: "/cv_sulaiman.pdf",
   url: siteUrl(),
   tagline:
     "I refine backends the way Gu are refined: under pressure, until only what survives remains. Real-time chat, payments, and the queues that hold them together.",
