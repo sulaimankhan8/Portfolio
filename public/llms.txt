@@ -1,0 +1,28 @@
+# Sulaiman Khan
+
+> Backend Software Engineer specializing in real-time systems, payments infrastructure, and event-driven queues.
+
+## Summary
+
+Mohd Sulaiman Khan (Sulaiman Khan) is a backend engineer based in Lucknow, India. Currently at Techdock Labs (since April 2026), formerly Full-stack Developer & Project Co-Lead at Docnish where he co-led 9 production products and designed payment systems processing 32K+ production transactions in 4 months.
+
+- Portfolio: https://www.sulaimankhan.site
+- GitHub: https://github.com/sulaimankhan8
+- LinkedIn: https://www.linkedin.com/in/suleman-khan-b4ab2b275
+- Email: sulaimanclass12b@gmail.com
+- Résumé: https://www.sulaimankhan.site/resume_sulaiman.pdf
+
+## Core Stack
+
+- Languages: TypeScript, JavaScript, Python, Go, C++
+- Backend: Node.js, Express, Socket.IO, Mediasoup (SFU WebRTC), BullMQ, FastAPI
+- Databases & Queues: PostgreSQL, Redis (Streams & Pub/Sub), MongoDB, Drizzle ORM
+- Ops & DevOps: Docker, GitHub Actions, AWS, Nginx, Vercel
+- Mobile & Desktop: Capacitor (Android & iOS native plugins), Wails (Go Windows app), Bluetooth Low Energy (BLE)
+
+## Key Projects & Case Studies
+
+- Myriad Voices: Distributed real-time messaging, voice, video platform (~16K msg/sec sustained in Artillery load tests) with an offline Bluetooth LE multi-hop mesh (up to 7 hops, end-to-end encrypted via X25519 + XChaCha20-Poly1305). Case study: https://www.sulaimankhan.site/gu/myriad-voices
+- Netz: Interactive numerical methods learning platform with 34 mathematical solvers, step-by-step working, and on-device ONNX handwriting recognition. Reached 5,000+ monthly learners. Case study: https://www.sulaimankhan.site/gu/numeral-insight
+- PactDoc (Blood Seal): Self-hosted document signing platform with chained audit logs, sealed PDFs, team workspaces, public API with webhooks, and Razorpay billing. Case study: https://www.sulaimankhan.site/gu/blood-seal
+

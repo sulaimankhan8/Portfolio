@@ -48,7 +48,7 @@ FACTS = [
     "Contact",
     ("Email", "sulaimanclass12b@gmail.com"),
     ("LinkedIn", "in/suleman-khan-b4ab2b275"),
-    ("Portfolio", "www.sulaimankhan.site/sitemap.xml"),
+    ("Portfolio", "www.sulaimankhan.site"),
 ]
 
 THEMES = {

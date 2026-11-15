@@ -9,10 +9,10 @@
 </p>
 
 <p align="center">
-  <a href="https://www.sulaimankhan.site/sitemap.xml"><img alt="Portfolio" src="https://img.shields.io/badge/Portfolio-B8261F?style=for-the-badge&logo=vercel&logoColor=white"></a>
+  <a href="https://www.sulaimankhan.site"><img alt="Portfolio" src="https://img.shields.io/badge/Portfolio-B8261F?style=for-the-badge&logo=vercel&logoColor=white"></a>
   <a href="https://www.linkedin.com/in/suleman-khan-b4ab2b275"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyBmaWxsPSIjRkZGRkZGIiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+TGlua2VkSW48L3RpdGxlPjxwYXRoIGQ9Ik0yMC40NDcgMjAuNDUyaC0zLjU1NHYtNS41NjljMC0xLjMyOC0uMDI3LTMuMDM3LTEuODUyLTMuMDM3LTEuODUzIDAtMi4xMzYgMS40NDUtMi4xMzYgMi45Mzl2NS42NjdIOS4zNTFWOWgzLjQxNHYxLjU2MWguMDQ2Yy40NzctLjkgMS42MzctMS44NSAzLjM3LTEuODUgMy42MDEgMCA0LjI2NyAyLjM3IDQuMjY3IDUuNDU1djYuMjg2ek01LjMzNyA3LjQzM2MtMS4xNDQgMC0yLjA2My0uOTI2LTIuMDYzLTIuMDY1IDAtMS4xMzguOTItMi4wNjMgMi4wNjMtMi4wNjMgMS4xNCAwIDIuMDY0LjkyNSAyLjA2NCAyLjA2MyAwIDEuMTM5LS45MjUgMi4wNjUtMi4wNjQgMi4wNjV6bTEuNzgyIDEzLjAxOUgzLjU1NVY5aDMuNTY0djExLjQ1MnpNMjIuMjI1IDBIMS43NzFDLjc5MiAwIDAgLjc3NCAwIDEuNzI5djIwLjU0MkMwIDIzLjIyNy43OTIgMjQgMS43NzEgMjRoMjAuNDUxQzIzLjIgMjQgMjQgMjMuMjI3IDI0IDIyLjI3MVYxLjcyOUMyNCAuNzc0IDIzLjIgMCAyMi4yMjIgMGguMDAzeiIvPjwvc3ZnPg==&logoColor=white"></a>
   <a href="mailto:sulaimanclass12b@gmail.com"><img alt="Email" src="https://img.shields.io/badge/Email-C5221F?style=for-the-badge&logo=gmail&logoColor=white"></a>
-  <a href="https://www.sulaimankhan.site/sitemap.xml/resume_sulaiman.pdf"><img alt="Résumé" src="https://img.shields.io/badge/R%C3%A9sum%C3%A9-30363D?style=for-the-badge&logo=readdotcv&logoColor=white"></a>
+  <a href="https://www.sulaimankhan.site/resume_sulaiman.pdf"><img alt="Résumé" src="https://img.shields.io/badge/R%C3%A9sum%C3%A9-30363D?style=for-the-badge&logo=readdotcv&logoColor=white"></a>
   <img alt="Profile views" src="https://komarev.com/ghpvc/?username=sulaimankhan8&style=for-the-badge&color=30363d&label=PROFILE+VIEWS">
 </p>
 
@@ -31,14 +31,14 @@ Off the clock I build things to find out how big systems work, like a Discord-st
 ## Recently shipped
 
 <!-- shipping:start -->
+- **[Portfolio](https://github.com/sulaimankhan8/Portfolio)** — [Add GitHub profile README, visual assets, and update script](https://github.com/sulaimankhan8/Portfolio/commit/47dd65aa76d703dfa2d81c132a29bd119c0c6728) <sub>Nov 13</sub>
+- **[Netz](https://github.com/sulaimankhan8/Netz)** — [Reorganize project structure and documentation files](https://github.com/sulaimankhan8/Netz/commit/11a91a33a1b1548314976458b048f399ee31c95e) <sub>Nov 11</sub>
+- **[Portfolio](https://github.com/sulaimankhan8/Portfolio)** — [Add portfolio application with gu dossier and theme support](https://github.com/sulaimankhan8/Portfolio/commit/d378dc7dc7a7c92798e70b061d8ccbe2302e8bbc) <sub>Nov 10</sub>
 - **[Netz](https://github.com/sulaimankhan8/Netz)** — [Add new algorithm modules and calculator pages across multiple units](https://github.com/sulaimankhan8/Netz/commit/4ee280848fce9f7aef4e46bee1a17a883933addb) <sub>Nov 7</sub>
-- **[Netz](https://github.com/sulaimankhan8/Netz)** — [Add Unit 10 and Unit 11 financial and tax calculators](https://github.com/sulaimankhan8/Netz/commit/91a60f780071b6d5421f2f38b89afd371eb920b7) <sub>Nov 5</sub>
-- **[Portfolio](https://github.com/sulaimankhan8/Portfolio)** — [Give each Lesser Gu its own 3D emblem](https://github.com/sulaimankhan8/Portfolio/commit/bca18eb7fc0b8e5f21416bf07588d5a4b8728fd9) <sub>Nov 3</sub>
-- **[Portfolio](https://github.com/sulaimankhan8/Portfolio)** — [Update projects with Oct 2026 progress and fresh screenshots](https://github.com/sulaimankhan8/Portfolio/commit/5f2959466c3bb8498ea56a4faf0ef922e858834a) <sub>Nov 1</sub>
 - **[Myriad Voices](https://github.com/sulaimankhan8/demo-discord)** — [Add native code explanation docs and frontend UI components](https://github.com/sulaimankhan8/demo-discord/commit/9cb120dd34186440962cc847afe4d18be40c4035) <sub>Nov 1</sub>
 - **[Myriad Voices](https://github.com/sulaimankhan8/demo-discord)** — [Ship the APK with the website so the download button shows on Vercel](https://github.com/sulaimankhan8/demo-discord/commit/acfe8f536bcb85b0afe61eb221d258ef7511469e) <sub>Oct 30</sub>
 
-<sub>Pulled from my commits by a GitHub Action · last refreshed Nov 10, 2026</sub>
+<sub>Pulled from my commits by a GitHub Action · last refreshed Nov 13, 2026</sub>
 <!-- shipping:end -->
 
 ## Featured projects
@@ -54,7 +54,7 @@ Off the clock I build things to find out how big systems work, like a Discord-st
       • Mediasoup SFU for voice and video with active-speaker detection<br>
       • When the internet drops, signed messages hop phone to phone over Bluetooth (up to 7 hops), end-to-end encrypted (X25519 + XChaCha20-Poly1305)<br>
       • One Next.js codebase ships as the website, Android and iOS apps (Capacitor) and a ~14 MB Windows app (Wails + Go)<br><br>
-      <a href="https://demo-discord-seven.vercel.app/">Live demo</a> · <a href="https://www.sulaimankhan.site/sitemap.xml/gu/myriad-voices">Case study</a>
+      <a href="https://demodiscord.vercel.app/">Live demo</a> · <a href="https://www.sulaimankhan.site/gu/myriad-voices">Case study</a>
     </td>
   </tr>
   <tr>
@@ -66,7 +66,7 @@ Off the clock I build things to find out how big systems work, like a Discord-st
       • 34 solvers (Bisection, Gauss-Seidel, Newton-Raphson…) with step-by-step working, iteration tables and plots<br>
       • Whiteboard that reads handwritten maths using three on-device ONNX models<br>
       • Notes with live solver blocks, daily tasks and streaks synced to accounts; installable PWA<br><br>
-      <a href="https://netz-ruby.vercel.app/">Live site</a> · <a href="https://www.sulaimankhan.site/sitemap.xml/gu/numeral-insight">Case study</a>
+      <a href="https://netzmath.vercel.app/">Live site</a> · <a href="https://www.sulaimankhan.site/gu/numeral-insight">Case study</a>
     </td>
   </tr>
   <tr>
@@ -77,7 +77,7 @@ Off the clock I build things to find out how big systems work, like a Discord-st
       • Sealed PDFs and a chained audit log of who signed what, and when<br>
       • Team workspaces with roles, public API with keys and webhooks, Razorpay billing, signing in English and Hindi<br>
       • 525 server tests and 56 browser tests; the server refuses to boot if any secret is missing<br><br>
-      <a href="https://www.sulaimankhan.site/sitemap.xml/gu/blood-seal">Case study</a>
+      <a href="https://www.sulaimankhan.site/gu/blood-seal">Case study</a>
     </td>
   </tr>
 </table>
@@ -176,4 +176,4 @@ Off the clock I build things to find out how big systems work, like a Discord-st
   <img alt="A snake eating my GitHub contribution graph" src="https://raw.githubusercontent.com/sulaimankhan8/sulaimankhan8/output/snake-dark.svg" width="100%">
 </picture>
 
-<p align="center"><sub>Banner and project art from <a href="https://www.sulaimankhan.site/sitemap.xml">my portfolio</a>, rendered in three.js. The card, the shipping log and the snake refresh every day through GitHub Actions.</sub></p>
+<p align="center"><sub>Banner and project art from <a href="https://www.sulaimankhan.site">my portfolio</a>, rendered in three.js. The card, the shipping log and the snake refresh every day through GitHub Actions.</sub></p>

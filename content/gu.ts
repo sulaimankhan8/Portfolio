@@ -14,7 +14,7 @@ export const GU: Gu[] = [
     vital: true,
     glyph: "力",
     emblem: { src: "/gu/worm.webp", alt: "Gold Gu worm coiled on a stone pedestal", width: 781, height: 900 },
-    liveUrl: "https://demo-discord-seven.vercel.app/",
+    liveUrl: "https://demodiscord.vercel.app/",
     repoUrl: "https://github.com/sulaimankhan8/demo-discord",
     ability:
       "Horizontally scalable messaging — ~16K messages/sec in load tests. Now an Android, iOS and Windows app whose chat keeps working over a Bluetooth mesh when the internet is gone.",
@@ -94,7 +94,7 @@ export const GU: Gu[] = [
         { src: "/shots/discord/voice.webp", caption: "Voice stage", width: 1600, height: 1000 },
         { src: "/shots/discord/login.webp", caption: "Entry", width: 1600, height: 1000 },
       ],
-      shotsHost: "demo-discord-seven.vercel.app",
+      shotsHost: "demodiscord.vercel.app",
       shotsNote: "Screens from the live app (Nov 2026); chat messages are sample data, and the mesh is the in-browser simulation.",
       killerMove: {
         name: "Unbroken Chorus",
@@ -116,7 +116,7 @@ export const GU: Gu[] = [
     status: "alive",
     glyph: "信",
     emblem: { src: "/gu/netz.webp", alt: "Yellow-gold crystal circled by golden orbit rings", width: 709, height: 800 },
-    liveUrl: "https://netz-ruby.vercel.app/",
+    liveUrl: "https://netzmath.vercel.app/",
     repoUrl: "https://github.com/sulaimankhan8/Netz",
     ability:
       "Founded Aug 2024; 5,000+ monthly users at its peak. Rebuilt in Oct 2026: 34 solvers, a handwriting whiteboard that reads your maths, notes, and daily tasks.",
@@ -170,7 +170,7 @@ export const GU: Gu[] = [
         { src: "/shots/netz/profile.webp", caption: "Tasks, streaks & robot", width: 1600, height: 1000 },
         { src: "/shots/netz/mobile.webp", caption: "Mobile", width: 412, height: 838 },
       ],
-      shotsHost: "netz-ruby.vercel.app",
+      shotsHost: "netzmath.vercel.app",
       shotsNote: "Screens captured from the live site, Nov 2026.",
       killerMove: {
         name: "Ten Thousand Solutions",
