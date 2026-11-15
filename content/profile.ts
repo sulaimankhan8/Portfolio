@@ -85,8 +85,14 @@ export const ARSENAL = [
     group: "Data",
     items: ["PostgreSQL", "MongoDB", "MySQL", "Redis", "Redis Streams", "BullMQ", "Drizzle"],
   },
+  {
+    glyph: "器",
+    color: "var(--color-r5)",
+    group: "Mobile & desktop",
+    items: ["Capacitor", "Android (Java)", "iOS (Swift)", "Wails (Go)", "BLE mesh"],
+  },
   { glyph: "幻", color: "var(--color-r5)", group: "Frontend", items: ["React", "Next.js", "Redux", "Tailwind", "D3.js", "PWA"] },
-  { glyph: "言", color: "var(--color-r2)", group: "Languages", items: ["TypeScript", "JavaScript", "Python", "SQL", "C++", "Bash"] },
+  { glyph: "言", color: "var(--color-r2)", group: "Languages", items: ["TypeScript", "JavaScript", "Python", "Go", "SQL", "C++", "Bash"] },
   {
     glyph: "试",
     color: "var(--color-r1)",
